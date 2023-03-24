@@ -34,7 +34,7 @@ public class User {
 
     public void withdraw(int amount) {
         if ((amount >= 0) && ((this.wallet - amount) >= 0)) {
-            this.wallet -= amount;
+            this.wallet += amount;
         } else {
             System.out.println("Amount must be positive integer & Wallet must be positive after Withdraw!");
         }
