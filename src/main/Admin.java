@@ -8,6 +8,7 @@ public class Admin {
      */
     private int id;
     private String email;
+    private HashMap<Integer, User> users;
 
     /**
      * Instantiate an Admin object
@@ -17,5 +18,11 @@ public class Admin {
         this.email = email;
     }
 
-    
+    public HashMap<Integer, User> getAllUsers() {
+        return this.users;
+    }
+
+    public void newUser(String name, String email, int initial_amount) {
+
+    }
 }
