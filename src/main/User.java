@@ -20,6 +20,10 @@ public class User {
         this.wallet = initial_amount;
     }
 
+    public String toString() {
+        return "Name - " + this.name + "\nEmail - " + this.email + "Funds - " + this.wallet + "\n";
+    }
+
     public int getWallet() {
         return this.wallet;
     }
@@ -75,4 +79,6 @@ public class User {
             }
         }
     }
+
+    
 }
