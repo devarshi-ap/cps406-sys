@@ -26,24 +26,36 @@ public class Stock {
     /**
      * Return array of in-order stock prices
      * 
-     * @return  prices  array of in-order stock prices
+     * @return  prices  integer array of in-order stock prices
      */
     public int[] getPrices() {
         return new int[]{this.market_price, this.open_price, this.close_price, this.high_price, this.low_price};
     }
 
+    /**
+     * Return volume of stock
+     * 
+     * @return   volume   integer value of stock volume
+     */
     public int getVolume() {
         return this.volume;
     }
 
     /**
-     * Increment/Decrement the outstanding_share value of Stock
-     * value < 0 : subtract from outstanding_shares
-     * value >= 0 : add to outstanding_shares
+     * Increment (shares >= 0)/Decrement (shares < 0)  the outstanding_share value of Stock
      * 
      * @param   value   integer number of shares should be incremented/decremented by
      */
     public void addToOutstandingShares(int shares) {
         this.outstanding_shares += shares;
+    }
+
+    /**
+     * Increment (shares >= 0)/Decrement (shares < 0) the floating_shares value of Stock
+     * 
+     * @param   value   integer number of shares should be incremented/decremented by
+     */
+    public void addToFloatingShares(int shares) {
+        this.floating_shares += shares;
     }
 }
