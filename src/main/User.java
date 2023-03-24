@@ -21,7 +21,7 @@ public class User {
     }
 
     public String toString() {
-        return "Name - " + this.name + "\nEmail - " + this.email + "Funds - " + this.wallet + "\n";
+        return "ID - " + this.id + "\n" + "Name - " + this.name + "\nEmail - " + this.email + "Funds - " + this.wallet + "\n";
     }
 
     public int getWallet() {
