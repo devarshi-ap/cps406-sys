@@ -3,7 +3,6 @@ package main;
 import java.util.HashMap;
 
 public class Market {
-    private HashMap<Integer, User> users;
     private HashMap<String, Stock> stocks;
 
     public static void main(String[] args) {
@@ -12,10 +11,6 @@ public class Market {
 
     public HashMap<String, Stock> getAllStocks() {
         return this.stocks;
-    }
-
-    public HashMap<Integer, User> getAllUsers() {
-        return this.users;
     }
 
     public boolean verifyStock(String sts) {
