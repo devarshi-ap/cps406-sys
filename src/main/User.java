@@ -16,6 +16,12 @@ public class User {
         this.id = Market.generateID();
     }
 
+    public User(boolean val) { // Admin (0 in wallet)
+        this.name = "null";
+        this.email = "null";
+        this.id = -1;
+    }
+
     /**
      * Return ID of User
      * 
@@ -26,6 +32,6 @@ public class User {
     }
 
     public String toString() {
-        return "ID - " + this.id + "\n" + "Name - " + this.name + "\nEmail - " + this.email + "\n";
+        return "\nID - " + this.id + "\n" + "Name - " + this.name + "\nEmail - " + this.email + "\n";
     }
 }
