@@ -21,6 +21,7 @@ public class Investor extends User {
         super(name, email);
         this.wallet = initial_amount;
     }
+
     /**
      * Returns an Investor object as a String
      * 
@@ -29,18 +30,21 @@ public class Investor extends User {
     public String toString() {
         return super.toString() + "Funds - " + this.wallet;
     }
+
     /**
-     * Returns the amount of money in Investor's wallet as an int 
+     * Returns the amount of money in Investor's wallet
      * 
      * @return int value of wallet
      */
     public int getWallet() {
         return this.wallet;
     }
+
     /**
-     * Adds money to Investor's wallet by an int amount 
-     * Prints an error message if the amount is not a positive integer 
+     * Adds money to Investor's wallet by an int amount.
+     * Prints an error message if the amount is not a positive integer.
      * or wallet funds exceed $100 million after adding amount
+     * 
      * @param amount
      */
     public void deposit(int amount) {
@@ -50,10 +54,12 @@ public class Investor extends User {
             System.out.println("Amount must be positive integer & Wallet musn't exceed $100 Million after Deposit!");
         }
     }
+
     /**
-     * Subtracts money from Investor's wallet by an int amount 
-     * Prints an error message if the amount is not a positive integer 
+     * Subtracts money from Investor's wallet by an int amount
+     * Prints an error message if the amount is not a positive integer
      * or wallet funds fall below $0 after subtracting amount
+     * 
      * @param amount
      */
     public void withdraw(int amount) {
@@ -63,8 +69,10 @@ public class Investor extends User {
             System.out.println("Amount must be positive integer & Wallet must be positive after Withdraw!");
         }
     }
+
     /**
      * Investor buys a stock and adds the stock to the HashMap portfolio
+     * 
      * @param sts
      * @param shares
      */
@@ -87,8 +95,10 @@ public class Investor extends User {
             }
         }
     }
+
     /**
-     * Investor sells a stock 
+     * Investor sells a stock
+     * 
      * @param sts
      * @param shares
      */
@@ -116,7 +126,7 @@ public class Investor extends User {
     public void exportTransactions() throws IOException {
         PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
 
-        for(String txn: this.transactions) {
+        for (String txn : this.transactions) {
             pw.print(txn);
         }
         pw.close();
