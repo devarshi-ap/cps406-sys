@@ -30,7 +30,11 @@ public class User {
     public int getId() {
         return this.id;
     }
-
+    /**
+     * Return User object as a String
+     * 
+     * @return String of User object
+     */
     public String toString() {
         return "\nID - " + this.id + "\n" + "Name - " + this.name + "\nEmail - " + this.email + "\n";
     }
