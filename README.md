@@ -3,19 +3,3 @@
 ## Stock-Market System Documentation
 
 ---
-
-## Classes : newStock()
-
-#### Market
-
-> Attributes:
->
-> -
-
-#### Stock
-
-#### Admin
-
-#### Investor
-
----
