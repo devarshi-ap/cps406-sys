@@ -23,7 +23,7 @@ public class Investor extends User {
     }
 
     public String toString() {
-        return super.toString() + "Funds - " + this.wallet + "\n";
+        return super.toString() + "Funds - " + this.wallet;
     }
 
     public int getWallet() {
