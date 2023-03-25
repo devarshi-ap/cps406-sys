@@ -6,13 +6,17 @@ public class Admin extends User {
     /**
      * Instance variables for Admin objects
      */
-    private HashMap<Integer, Investor> investors;
+    private HashMap<Integer, Investor> investors = new HashMap<>();
 
     /**
      * Instantiate an Admin object
      */
     public Admin(String name, String email) {
         super(name, email);
+        this.newInvestor("Steve Carell", "steve@gmail.com", 100_000);
+        this.newInvestor("Christian Bale", "cbale@yahoo.com", 200_000);
+        this.newInvestor("Ryan Gosling", "ryan@hotmail.com", 300_000);
+        this.newInvestor("Brad Pitt", "brad@gmail.com", 400_000);
     }
 
     public String toString() {
@@ -26,5 +30,9 @@ public class Admin extends User {
     public void newInvestor(String name, String email, int initial_amount) {
         Investor inv = new Investor(name, email, initial_amount);
         this.investors.put(inv.getId(), inv);
+    }
+
+    public void newInvestor(Investor investor) {
+        this.investors.put(investor.getId(), investor);
     }
 }
