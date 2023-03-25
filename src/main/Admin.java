@@ -1,28 +1,30 @@
 package main;
-import java.util.HashMap;
-import java.util.ArrayList;
 
-public class Admin {
+import java.util.HashMap;
+
+public class Admin extends User {
     /**
      * Instance variables for Admin objects
      */
-    private int id;
-    private String email;
-    private HashMap<Integer, User> users;
+    private HashMap<Integer, Investor> investors;
 
     /**
      * Instantiate an Admin object
      */
-    public Admin(int id, String email) {
-        this.id = id;
-        this.email = email;
+    public Admin(String name, String email) {
+        super(name, email);
     }
 
-    public HashMap<Integer, User> getAllUsers() {
-        return this.users;
+    public String toString() {
+        return super.toString() + "\nClients - " + this.getAllInvestors().size();
     }
 
-    public void newUser(String name, String email, int initial_amount) {
+    public HashMap<Integer, Investor> getAllInvestors() {
+        return this.investors;
+    }
 
+    public void newInvestor(String name, String email, int initial_amount) {
+        Investor inv = new Investor(name, email, initial_amount);
+        this.investors.put(inv.getId(), inv);
     }
 }

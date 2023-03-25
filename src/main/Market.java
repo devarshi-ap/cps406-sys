@@ -1,9 +1,9 @@
 package main;
-// import java.util.Scanner;
 import java.util.HashMap;
 
 public class Market {
     private HashMap<String, Stock> stocks;
+    private static int idCounter = 0;
 
     public static void main(String[] args) {
         // main program to run
@@ -23,5 +23,10 @@ public class Market {
 
     public void manpage() {
         System.out.println("manpage");
+    }
+
+    // return current id counter and increment it
+    public static int generateID() {
+        return idCounter++;
     }
 }
