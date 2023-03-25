@@ -3,9 +3,22 @@ package main;
 import java.util.HashMap;
 import java.util.Scanner;
 
+interface Command {
+    void runCommand();
+}
+
+
 public class Market {
     public static HashMap<String, Stock> stocks = new HashMap<>();
+    HashMap<String, Command> methodMap = new HashMap<String, Command>();
     private static int idCounter = 0;
+
+    public void setupMap() {
+        methodMap.put("exit", new Command() {
+            public void runCommand() { System.out.println("help"); };
+        });
+
+    }
 
     public static void main(String[] args) {
         // main program to run
@@ -37,26 +50,26 @@ public class Market {
 
             admin = new Admin(name, email);
 
-            System.out.println("\n------+" + admin + "\n------+");
+            System.out.println("\n------+" + admin + "\n------+\n");
         } else {
             // INVESTOR
-            long initial_amount;
+            String initial_amount;
             do {
                 System.out.print("Enter initial amount in wallet ($100,000,000 MAX) : ");
-                initial_amount = scanner.nextLong();
-                if (initial_amount > 100_000_000)
+                initial_amount = scanner.nextLine();
+                
+                if (initial_amount.length() > 9 || Integer.valueOf(initial_amount) > 100_000_000)
                     System.out.println("Try again!");
-            } while (initial_amount > 100_000_000);
 
-            investor = new Investor(name, email, (int) initial_amount);
+            } while (initial_amount.length() > 9 || Integer.valueOf(initial_amount) > 100_000_000);
+
+            investor = new Investor(name, email, Integer.valueOf(initial_amount));
             admin = new Admin("Bill gates", "bill@gmail.com"); // default dummy admin
             admin.newInvestor(investor);
 
             System.out.println("\n------+" + investor + "\n------+");
-            System.out.println("\n------+" + admin + "\n------+");
+            System.out.println("\n------+" + admin + "\n------+\n");
         }
-
-        System.out.println("");
 
         // infinite prompt
         String cmd;
