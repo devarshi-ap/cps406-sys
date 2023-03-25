@@ -4,7 +4,7 @@
 
 ---
 
-## Classes :
+## Classes : newStock()
 
 #### Market
 
