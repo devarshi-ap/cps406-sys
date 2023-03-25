@@ -34,28 +34,36 @@ public class Market {
         if (userInput.equals("0")) {
             // ADMIN
             System.out.println("You've chosen to play as Admin.");
-            
+
             admin = new Admin(name, email);
-            
+
             System.out.println("\n------+" + admin + "\n------+");
         } else {
             // INVESTOR
-            int initial_amount;
+            long initial_amount;
             do {
                 System.out.print("Enter initial amount in wallet ($100,000,000 MAX) : ");
-                initial_amount = scanner.nextInt();
-                if (initial_amount > 100_000_000) System.out.println("Try again!");
+                initial_amount = scanner.nextLong();
+                if (initial_amount > 100_000_000)
+                    System.out.println("Try again!");
             } while (initial_amount > 100_000_000);
-            
-            investor = new Investor(name, email, initial_amount);
+
+            investor = new Investor(name, email, (int) initial_amount);
             admin = new Admin("Bill gates", "bill@gmail.com"); // default dummy admin
             admin.newInvestor(investor);
-            
+
             System.out.println("\n------+" + investor + "\n------+");
             System.out.println("\n------+" + admin + "\n------+");
         }
-        
-        
+
+        System.out.println("");
+
+        // infinite prompt
+        String cmd;
+        do {
+            System.out.print("> ");
+            cmd = scanner.nextLine();
+        } while (!cmd.equals("exit"));
 
         scanner.close();
     }
