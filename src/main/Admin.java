@@ -18,20 +18,36 @@ public class Admin extends User {
         this.newInvestor("Ryan Gosling", "ryan@hotmail.com", 300_000);
         this.newInvestor("Brad Pitt", "brad@gmail.com", 400_000);
     }
-
+    /**
+     * Return Admin object as a string 
+     * 
+     * @return String of Admin object
+     */
     public String toString() {
         return super.toString() + "Clients - " + this.getAllInvestors().size();
     }
-
+    /**
+     * Return all investors stored in the HashMap 
+     * 
+     * @return HashMap containing all investors
+     */
     public HashMap<Integer, Investor> getAllInvestors() {
         return this.investors;
     }
-
+    /**
+     * Creates a new Investor object and then adds the object to the HashMap
+     * @param name
+     * @param email
+     * @param initial_amount
+     */
     public void newInvestor(String name, String email, int initial_amount) {
         Investor inv = new Investor(name, email, initial_amount);
         this.investors.put(inv.getId(), inv);
     }
-
+    /**
+     * Adds investor object into the HashMap
+     * @param investor
+     */
     public void newInvestor(Investor investor) {
         this.investors.put(investor.getId(), investor);
     }
