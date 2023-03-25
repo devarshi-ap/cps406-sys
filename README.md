@@ -8,7 +8,7 @@
 
 #### Market
 
-> Attirbutes:
+> Attributes:
 >
 > -
 
