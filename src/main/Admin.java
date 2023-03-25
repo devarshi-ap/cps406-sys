@@ -16,7 +16,7 @@ public class Admin extends User {
     }
 
     public String toString() {
-        return super.toString() + "\nClients - " + this.getAllInvestors().size();
+        return super.toString() + "Clients - " + this.getAllInvestors().size();
     }
 
     public HashMap<Integer, Investor> getAllInvestors() {

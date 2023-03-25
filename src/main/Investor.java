@@ -2,6 +2,9 @@ package main;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Investor extends User {
     /**
@@ -28,7 +31,7 @@ public class Investor extends User {
     }
 
     public void deposit(int amount) {
-        if ((amount >= 0) && ((this.wallet + amount) > 100_000_000)) {
+        if ((amount >= 0) && ((this.wallet + amount) <= 100_000_000)) {
             this.wallet += amount;
         } else {
             System.out.println("Amount must be positive integer & Wallet musn't exceed $100 Million after Deposit!");
@@ -41,6 +44,56 @@ public class Investor extends User {
         } else {
             System.out.println("Amount must be positive integer & Wallet must be positive after Withdraw!");
         }
+    }
+
+    public void buy(String sts, int shares) {
+        if (Market.verifyStock(sts)) {
+            if (shares <= Market.stocks.get(sts).floating_shares) {
+                // sts exists and enough floating shares present, buy stock
+                int dollar_amt = Market.stocks.get(sts).market_price * shares;
+                this.withdraw(dollar_amt);
+
+                // add to transactions
+                String txn = "BUY-" + sts.toUpperCase() + "-" + shares;
+                this.addTransaction(txn);
+
+                // subtract from stock floating-shares (fewer left)
+                Market.stocks.get(sts).addToFloatingShares(0 - shares);
+
+                // add stock to user's portfolio
+                this.addToPortfolio(sts, shares);
+            }
+        }
+    }
+
+    public void sell(String sts, int shares) {
+        if (Market.verifyStock(sts) && this.getPortfolio().containsKey(sts)) {
+            if (this.getPortfolio().get(sts) >= shares) {
+                // sts exists, investor owns stock share(s), and has more or equal amount of
+                // shares wanting to be sold, then sell shares
+                int dollar_amt = Market.stocks.get(sts).market_price * shares;
+                this.deposit(dollar_amt);
+
+                // add to transactions
+                String txn = "SELL-" + sts.toUpperCase() + "-" + shares;
+                this.addTransaction(txn);
+
+                // add to stock floating-shares (more available)
+                Market.stocks.get(sts).addToFloatingShares(shares);
+
+                // add stock to user's portfolio
+                this.removeFromPortfolio(sts);
+            }
+        }
+    }
+
+    public void exportTransactions() throws IOException {
+        PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
+
+        for(String txn: this.transactions) {
+            pw.print(txn);
+        }
+        pw.close();
     }
 
     public ArrayList<String> getTransactions() {

@@ -2,7 +2,7 @@ package main;
 import java.util.HashMap;
 
 public class Market {
-    private HashMap<String, Stock> stocks;
+    public static HashMap<String, Stock> stocks;
     private static int idCounter = 0;
 
     public static void main(String[] args) {
@@ -10,11 +10,11 @@ public class Market {
     }
 
     public HashMap<String, Stock> getAllStocks() {
-        return this.stocks;
+        return stocks;
     }
 
-    public boolean verifyStock(String sts) {
-        return this.stocks.containsKey(sts);
+    public static boolean verifyStock(String sts) {
+        return stocks.containsKey(sts);
     }
 
     public void end() {
