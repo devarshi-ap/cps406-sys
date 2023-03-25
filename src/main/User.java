@@ -16,6 +16,11 @@ public class User {
         this.id = Market.generateID();
     }
 
+    /**
+     * Return ID of User
+     * 
+     * @return  user ID
+     */
     public int getId() {
         return this.id;
     }
