@@ -24,7 +24,7 @@ public class Stock {
     }
 
     public String toString() {
-        return "------+\n" + this.name 
+        return "------+\n" + this.name + " (" + this.sts + ")"
         + " Stock prices"
         + "\nMarket Price: \t$" + this.market_price
         + "\nOpening Price: \t$" + this.open_price
