@@ -64,7 +64,6 @@ public class MarketInterface {
         do {
             System.out.print("> ");
             cmd = scanner.nextLine();
-            System.out.println();
 
             // 🟢 EMPTY (do nothing)
             if (cmd == null || cmd.equals("")) {
