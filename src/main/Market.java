@@ -1,6 +1,9 @@
 package main;
 
 import java.util.HashMap;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Market {
     public static HashMap<String, Stock> stocks = new HashMap<>();
@@ -78,5 +81,21 @@ public class Market {
      */
     public static int generateID() {
         return idCounter++;
+    }
+
+    public void readStocks() throws FileNotFoundException{
+        Scanner file = new Scanner(new File("stocks.txt"));
+        String format = file.nextLine();
+        
+        while(file.hasNextLine()){
+            Stock stock;
+            String[] data;
+
+            String line = file.nextLine();
+            data = line.split(",");
+            int[] prices = {Integer.valueOf(data[2]),Integer.valueOf(data[3]),Integer.valueOf(data[4]),Integer.valueOf(data[5]),Integer.valueOf(data[6])};
+            stock = new Stock(data[0], data[1], prices, Integer.valueOf(data[7]), Integer.valueOf(data[8]));
+            stocks.put(data[1], stock);
+        }
     }
 }

@@ -2,6 +2,7 @@ package main;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.File;
 
 public class MarketInterface {
 
@@ -9,10 +10,6 @@ public class MarketInterface {
     public static void main(String[] args) throws IOException {
         // main program to run
         Market market = new Market();
-
-        int[] prices = new int[]{1,2,3,4,5};
-        Stock test = new Stock("Tesla", "TSLA", prices, 1800, 123129312);
-        market.addStock("TSLA", test);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -77,6 +74,11 @@ public class MarketInterface {
             else if (cmd.equalsIgnoreCase("MAN"))
 			{
                 market.manpage();
+            }
+            else if (cmd.equalsIgnoreCase("teststock"))
+			{
+                Scanner file = new Scanner(new File("stocks.txt"));
+                System.out.println(file.nextLine());
             }
             else if (cmd.equalsIgnoreCase("LOG")) 
 			{
