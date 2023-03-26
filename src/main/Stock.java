@@ -31,7 +31,7 @@ public class Stock {
         + "\nClosing Price: \t$" + this.close_price
         + "\nHigh Price: \t$" + this.high_price
         + "\nLow Price: \t$" + this.low_price
-        + "\n------+";
+        + "\n------+\n";
     }
 
     /**

@@ -84,7 +84,7 @@ public class Market {
     }
 
     public void readStocks() throws FileNotFoundException{
-        Scanner file = new Scanner(new File("stocks.txt"));
+        Scanner file = new Scanner(new File("C:\\Users\\humza\\cps406\\cps406-sys\\src\\stocks.txt"));
         String format = file.nextLine();
         
         while(file.hasNextLine()){

@@ -2,7 +2,6 @@ package main;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.io.File;
 
 public class MarketInterface {
 
@@ -10,6 +9,7 @@ public class MarketInterface {
     public static void main(String[] args) throws IOException {
         // main program to run
         Market market = new Market();
+        market.readStocks();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -75,11 +75,6 @@ public class MarketInterface {
 			{
                 market.manpage();
             }
-            else if (cmd.equalsIgnoreCase("teststock"))
-			{
-                Scanner file = new Scanner(new File("stocks.txt"));
-                System.out.println(file.nextLine());
-            }
             else if (cmd.equalsIgnoreCase("LOG")) 
 			{
                 if (userInput.equals("0")){
@@ -121,6 +116,62 @@ public class MarketInterface {
                 else
                 {
                     System.out.print("No stock exists under the STS <" + cmd + ">.\n");
+                }
+            }
+            else if (cmd.equalsIgnoreCase("LIST-STOCKS")) 
+			{
+                for(Stock stock : market.getAllStocks().values()){
+                    System.out.print(stock);
+                }
+            }
+            else if (cmd.equalsIgnoreCase("VOLUME")) 
+			{
+                System.out.print("Please enter the Stock Ticker Symbol (STS) of your desired stock. \n> ");
+                cmd = scanner.nextLine();
+
+                if (market.verifyStock(cmd)) {
+                    Stock stock = market.getAllStocks().get(cmd);
+                    System.out.print("The volume of " + stock.name + " stock is : " + stock.getVolume());
+                }
+                else
+                {
+                    System.out.print("No stock exists under the STS <" + cmd + ">.\n");
+                }
+            }
+            else if (cmd.equalsIgnoreCase("WALLET")) 
+			{
+                if (userInput.equals("0")){
+                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
+                }
+                else 
+                {
+                    System.out.println("Your current balance is : \t $" + investor.getWallet());
+                }
+            }
+            else if (cmd.equalsIgnoreCase("WITHDRAW")) 
+			{
+                if (userInput.equals("0")){
+                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
+                }
+                else 
+                {
+                    System.out.println("Please enter the amount that you would like to withdraw. \n> ");
+                    cmd = scanner.nextLine();
+
+                    investor.withdraw(Integer.valueOf(cmd));
+                }
+            }
+            else if (cmd.equalsIgnoreCase("DEPOSIT")) 
+			{
+                if (userInput.equals("0")){
+                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
+                }
+                else 
+                {
+                    System.out.println("Please enter the amount that you would like to deposit. \n> ");
+                    cmd = scanner.nextLine();
+
+                    investor.deposit(Integer.valueOf(cmd));
                 }
             }
             else
