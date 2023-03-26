@@ -131,7 +131,7 @@ public class MarketInterface {
 
                 if (market.verifyStock(cmd)) {
                     Stock stock = market.getAllStocks().get(cmd);
-                    System.out.print("The volume of " + stock.name + " stock is : " + stock.getVolume());
+                    System.out.print("The volume of " + stock.name + " stock is : " + stock.getVolume() + "\n");
                 }
                 else
                 {
