@@ -69,6 +69,10 @@ public class Market {
 			{
 				System.out.println("Please enter a valid command. See 'manpage' for more info.");
             }
+            else if (cmd.equalsIgnoreCase("MAN"))
+			{
+                //manpage();
+            }
             else if (cmd.equalsIgnoreCase("LOG")) 
 			{
                 if (userInput.equals("0")){
@@ -131,14 +135,14 @@ public class Market {
                         new-stock\t\t<adds a new stock into the market (ADMIN ONLY)>
                         volume\t\t\t<get volume of a stock>
                         buy\t\t\t<buy a stock (INVESTOR ONLY)>
-                        sell\t\t<sell a stock (INVESTOR ONLY)>
+                        sell\t\t\t<sell a stock (INVESTOR ONLY)>
                         add-watch\t\t<add stock to watchlist (INVESTOR ONLY)>
                         del-watch\t\t<delete stock from watchlist (INVESTOR ONLY)>
                         get-watch\t\t<get user's watchlist (INVESTOR ONLY)>
                         get-portfolio\t\t<get user's trading portfolio (INVESTOR ONLY)>
                         wallet\t\t\t<get amount of money in user's wallet (INVESTOR ONLY)>
                         deposit\t\t\t<deposit funds into wallet (INVESTOR ONLY)>
-                        withdraw\t\t\t<withdraw funds from wallet (INVESTOR ONLY)>
+                        withdraw\t\t<withdraw funds from wallet (INVESTOR ONLY)>
                         man\t\t\t<displays the manual page for this market system>
                         overwrite-watchlist\t<overwrites data on an investor's watchlist (ADMIN ONLY)>
                         list-users\t\t<displays a list of all user's in the market (ADMIN ONLY)>
