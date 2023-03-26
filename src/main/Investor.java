@@ -82,7 +82,7 @@ public class Investor extends User {
      * @param shares
      */
     public void buy(String sts, int shares) {
-        if (Market.verifyStock(sts)) {
+        if (Market.verifyStock(sts)) { //Might have to change it to market not Market
             if (shares <= Market.stocks.get(sts).floating_shares) {
                 // sts exists and enough floating shares present, buy stock
                 int dollar_amt = Market.stocks.get(sts).market_price * shares;
@@ -129,12 +129,19 @@ public class Investor extends User {
     }
 
     public void exportTransactions() throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
-
-        for (String txn : this.transactions) {
-            pw.print(txn);
+        
+        if (this.transactions != null){
+            PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
+            for (String txn : this.transactions) {
+                pw.print(txn);
+            }
+            pw.close();
         }
-        pw.close();
+        else
+        {
+            System.out.println("User has no transactions to export.");
+        }
+        
     }
 
     public ArrayList<String> getTransactions() {

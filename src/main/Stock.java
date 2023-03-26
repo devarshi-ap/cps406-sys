@@ -23,6 +23,17 @@ public class Stock {
         this.floating_shares = 0;
     }
 
+    public String toString() {
+        return "------+\n" + this.name 
+        + " Stock prices"
+        + "\nMarket Price: \t$" + this.market_price
+        + "\nOpening Price: \t$" + this.open_price
+        + "\nClosing Price: \t$" + this.close_price
+        + "\nHigh Price: \t$" + this.high_price
+        + "\nLow Price: \t$" + this.low_price
+        + "\n------+";
+    }
+
     /**
      * Return sts of stock
      * 

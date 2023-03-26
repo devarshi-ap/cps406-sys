@@ -1,13 +1,18 @@
 package main;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class MarketInterface {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // main program to run
         Market market = new Market();
+
+        int[] prices = new int[]{1,2,3,4,5};
+        Stock test = new Stock("Tesla", "TSLA", prices, 1800, 123129312);
+        market.addStock("TSLA", test);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -67,7 +72,7 @@ public class MarketInterface {
 
             if (cmd == null || cmd.equals("")) 
 			{
-				System.out.println("Please enter a valid command. See 'manpage' for more info.");
+				System.out.println("Please enter a valid command. See command 'man' for the manual page.");
             }
             else if (cmd.equalsIgnoreCase("MAN"))
 			{
@@ -83,9 +88,42 @@ public class MarketInterface {
                     System.out.println(investor.getTransactions());
                 }
             }
-            else if (cmd == null || cmd.equals("")) 
+            else if (cmd.equalsIgnoreCase("EXPORT")) 
 			{
-			
+                if (userInput.equals("0")){
+                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
+                }
+                else 
+                {
+                    investor.exportTransactions();
+                }
+            }
+            else if (cmd.equalsIgnoreCase("NEW-STOCK")) 
+			{
+                if (userInput.equals("0")){
+                    //
+                }
+                else 
+                {
+                    System.out.println("Cannot use this command in this context. (ADMIN ONLY).");
+                }
+            }
+            else if (cmd.equalsIgnoreCase("STOCK-PRICE")) 
+			{
+                System.out.print("Please enter the Stock Ticker Symbol (STS) of your desired stock. \n> ");
+                cmd = scanner.nextLine();
+
+                if (market.verifyStock(cmd)) {
+                    System.out.print(market.getAllStocks().get(cmd));
+                }
+                else
+                {
+                    System.out.print("No stock exists under the STS <" + cmd + ">.\n");
+                }
+            }
+            else
+			{
+                System.out.println("Please enter a valid command. See command 'man' for the manual page.");
             }
             
         } while (!cmd.equals("exit"));

@@ -6,6 +6,8 @@ public class Market {
     public static HashMap<String, Stock> stocks = new HashMap<>();
     private static int idCounter = 0;
 
+    
+
     /**
      * Return all stocks
      * 
@@ -24,6 +26,10 @@ public class Market {
      */
     public static boolean verifyStock(String sts) {
         return stocks.containsKey(sts);
+    }
+
+    public void addStock(String sts, Stock stock){
+        stocks.put(sts, stock);
     }
 
     /**
