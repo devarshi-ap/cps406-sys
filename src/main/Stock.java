@@ -24,6 +24,15 @@ public class Stock {
     }
 
     /**
+     * Return sts of stock
+     * 
+     * @return  sts  string stock ticker symbol
+     */
+    public String getSTS() {
+        return this.sts;
+    }
+
+    /**
      * Return array of in-order stock prices
      * 
      * @return  prices  integer array of in-order stock prices

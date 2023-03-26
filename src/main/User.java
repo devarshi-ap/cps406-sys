@@ -30,6 +30,7 @@ public class User {
     public int getId() {
         return this.id;
     }
+    
     /**
      * Return User object as a String
      * 
