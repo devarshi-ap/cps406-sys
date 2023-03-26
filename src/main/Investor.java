@@ -22,6 +22,11 @@ public class Investor extends User {
         this.wallet = initial_amount;
     }
 
+    public Investor(boolean val) { // Investor
+        super(true);
+        this.wallet = 0;
+    }
+
     /**
      * Returns an Investor object as a String
      * 

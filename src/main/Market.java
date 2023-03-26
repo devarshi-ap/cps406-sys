@@ -24,6 +24,9 @@ public class Market {
         // main program to run
         Scanner scanner = new Scanner(System.in);
 
+        Investor investor = new Investor(true);
+        Admin admin;
+
         // prompt to run as Admin or Investor
         String userInput;
         do {
@@ -33,8 +36,7 @@ public class Market {
                 System.out.println("Try again!");
         } while (!userInput.equals("0") && !userInput.equals("1"));
 
-        Investor investor;
-        Admin admin;
+        
 
         // prompt for User details
         System.out.print("Enter name : ");
@@ -49,7 +51,6 @@ public class Market {
             System.out.println("You've chosen to play as Admin.");
 
             admin = new Admin(name, email);
-
             System.out.println("\n------+" + admin + "\n------+\n");
         } else {
             // INVESTOR
@@ -76,6 +77,26 @@ public class Market {
         do {
             System.out.print("> ");
             cmd = scanner.nextLine();
+
+            if (cmd == null || cmd.equals("")) 
+			{
+				System.out.println("Please enter a valid command. See 'manpage' for more info.");
+            }
+            else if (cmd.equalsIgnoreCase("LOG")) 
+			{
+                if (userInput.equals("0")){
+                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
+                }
+                else 
+                {
+                    System.out.println(investor.getTransactions());
+                }
+            }
+            else if (cmd == null || cmd.equals("")) 
+			{
+			
+            }
+            
         } while (!cmd.equals("exit"));
 
         scanner.close();
