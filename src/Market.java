@@ -1,4 +1,4 @@
-package main;
+
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -8,8 +8,6 @@ import java.io.FileNotFoundException;
 public class Market {
     public static HashMap<String, Stock> stocks = new HashMap<>();
     private static int idCounter = 0;
-
-    
 
     /**
      * Return all stocks
@@ -31,7 +29,7 @@ public class Market {
         return stocks.containsKey(sts);
     }
 
-    public void addStock(String sts, Stock stock){
+    public void addStock(String sts, Stock stock) {
         stocks.put(sts, stock);
     }
 
@@ -83,19 +81,22 @@ public class Market {
         return idCounter++;
     }
 
-    public void readStocks() throws FileNotFoundException{
-        Scanner file = new Scanner(new File("C:\\Users\\humza\\cps406\\cps406-sys\\src\\stocks.txt"));
-        String format = file.nextLine();
-        
-        while(file.hasNextLine()){
+    public void readStocks() throws FileNotFoundException {
+        File f = new File("stocks.txt");
+        Scanner sc = new Scanner(f);
+
+        while (sc.hasNextLine()) {
             Stock stock;
             String[] data;
 
-            String line = file.nextLine();
+            String line = sc.nextLine();
             data = line.split(",");
-            int[] prices = {Integer.valueOf(data[2]),Integer.valueOf(data[3]),Integer.valueOf(data[4]),Integer.valueOf(data[5]),Integer.valueOf(data[6])};
+            int[] prices = { Integer.valueOf(data[2]), Integer.valueOf(data[3]), Integer.valueOf(data[4]),
+                    Integer.valueOf(data[5]), Integer.valueOf(data[6]) };
             stock = new Stock(data[0], data[1], prices, Integer.valueOf(data[7]), Integer.valueOf(data[8]));
             stocks.put(data[1], stock);
         }
+
+        sc.close();
     }
 }
