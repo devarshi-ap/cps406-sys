@@ -1,5 +1,3 @@
-
-
 public class Stock {
     /**
      * Instance variables for Stock objects
@@ -24,14 +22,12 @@ public class Stock {
     }
 
     public String toString() {
-        return "------+\n" + this.name + " (" + this.sts + ")"
-        + " Stock prices"
+        return "------+ " + this.name + " (" + this.sts + ")"
         + "\nMarket Price: \t$" + this.market_price
         + "\nOpening Price: \t$" + this.open_price
         + "\nClosing Price: \t$" + this.close_price
         + "\nHigh Price: \t$" + this.high_price
-        + "\nLow Price: \t$" + this.low_price
-        + "\n------+\n";
+        + "\nLow Price: \t$" + this.low_price + "\n";
     }
 
     /**

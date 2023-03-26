@@ -1,5 +1,3 @@
-
-
 import java.util.HashMap;
 import java.util.Scanner;
 import java.io.File;
@@ -82,7 +80,7 @@ public class Market {
     }
 
     public void readStocks() throws FileNotFoundException {
-        File f = new File("stocks.txt");
+        File f = new File("src/stocks.txt");
         Scanner sc = new Scanner(f);
 
         while (sc.hasNextLine()) {

@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -66,68 +64,83 @@ public class MarketInterface {
         do {
             System.out.print("> ");
             cmd = scanner.nextLine();
+            System.out.println();
 
+            // 🟢 EMPTY (do nothing)
             if (cmd == null || cmd.equals("")) {
-                System.out.println("Please enter a valid command. See command 'man' for the manual page.");
-            } else if (cmd.equalsIgnoreCase("MAN")) {
+                System.out.println("");
+            }
+
+            // 🟢 manpage
+            else if (cmd.equalsIgnoreCase("MAN")) {
                 market.manpage();
-            } else if (cmd.equalsIgnoreCase("LOG")) {
-                if (isAdmin) {
+            }
+
+            // 🟡 log transactions (user only)
+            else if (cmd.equalsIgnoreCase("LOG")) {
+                if (isAdmin)
                     System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                } else {
+                else
                     System.out.println(investor.getTransactions());
-                }
-            } else if (cmd.equalsIgnoreCase("EXPORT")) {
-                if (isAdmin) {
+            }
+
+            // 🟡 export transactions to file (user only)
+            else if (cmd.equalsIgnoreCase("EXPORT")) {
+                if (isAdmin)
                     System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                } else {
+                else
                     investor.exportTransactions();
-                }
-            } else if (cmd.equalsIgnoreCase("NEW-STOCK")) {
+            }
+
+            // 🟡 add new stock (admin only)
+            else if (cmd.equalsIgnoreCase("NEW-STOCK")) {
                 if (isAdmin) {
                     //
                 } else {
                     System.out.println("Cannot use this command in this context. (ADMIN ONLY).");
                 }
-            } else if (cmd.equalsIgnoreCase("STOCK-PRICE")) {
-                System.out.print("Please enter the Stock Ticker Symbol (STS) of your desired stock. \n> ");
-                cmd = scanner.nextLine();
+            }
 
-                if (market.verifyStock(cmd)) {
+            // 🟡 get prices of given stock
+            else if (cmd.equalsIgnoreCase("STOCK-PRICE")) {
+                System.out.print("Enter STS  : ");
+                String sts = scanner.nextLine();
+
+                if (Market.verifyStock(sts))
                     System.out.print(market.getAllStocks().get(cmd));
-                } else {
-                    System.out.print("No stock exists under the STS <" + cmd + ">.\n");
-                }
-            } else if (cmd.equalsIgnoreCase("LIST-STOCKS")) {
-                for (Stock stock : market.getAllStocks().values()) {
-                    System.out.print(stock);
-                }
-            } else if (cmd.equalsIgnoreCase("VOLUME")) {
+                else
+                    System.out.println("STS (" + sts + ") not found.");
+            }
+
+            // 🟡 list all stocks
+            else if (cmd.equalsIgnoreCase("LIST-STOCKS")) {
+                for (Stock stock : market.getAllStocks().values())
+                    System.out.println(stock);
+            }
+            
+            // 🟡 get stock volume
+            else if (cmd.equalsIgnoreCase("VOLUME")) {
                 System.out.print("Please enter the Stock Ticker Symbol (STS) of your desired stock. \n> ");
-                cmd = scanner.nextLine();
+                String sts = scanner.nextLine();
 
-                if (market.verifyStock(cmd)) {
-                    Stock stock = market.getAllStocks().get(cmd);
-                    System.out.print("The volume of " + stock.name + " stock is : " + stock.getVolume() + "\n");
+                if (Market.verifyStock(sts)) {
+                    Stock stock = market.getAllStocks().get(sts);
+                    System.out.println(sts + " Volume : " + stock.getVolume() + "\n");
                 } else {
-                    System.out.print("No stock exists under the STS <" + cmd + ">.\n");
+                    System.out.println("STS (" + sts + ") not found.");
                 }
-            } else if (cmd.equalsIgnoreCase("WALLET")) {
-                if (isAdmin) {
+            }
+            
+            // 🟡 get amount in wallet (user only)
+            else if (cmd.equalsIgnoreCase("WALLET")) {
+                if (isAdmin)
                     System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                } else {
+                else
                     System.out.println("Your current balance is : \t $" + investor.getWallet());
-                }
-            } else if (cmd.equalsIgnoreCase("WITHDRAW")) {
-                if (isAdmin) {
-                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                } else {
-                    System.out.println("Please enter the amount that you would like to withdraw. \n> ");
-                    cmd = scanner.nextLine();
-
-                    investor.withdraw(Integer.valueOf(cmd));
-                }
-            } else if (cmd.equalsIgnoreCase("DEPOSIT")) {
+            } 
+            
+            // 🟡 deposit funds into wallet (user only)
+            else if (cmd.equalsIgnoreCase("DEPOSIT")) {
                 if (isAdmin) {
                     System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
                 } else {
