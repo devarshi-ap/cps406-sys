@@ -3,22 +3,9 @@ package main;
 import java.util.HashMap;
 import java.util.Scanner;
 
-interface Command {
-    void runCommand();
-}
-
-
 public class Market {
     public static HashMap<String, Stock> stocks = new HashMap<>();
-    HashMap<String, Command> methodMap = new HashMap<String, Command>();
     private static int idCounter = 0;
-
-    public void setupMap() {
-        methodMap.put("exit", new Command() {
-            public void runCommand() { System.out.println("help"); };
-        });
-
-    }
 
     public static void main(String[] args) {
         // main program to run
