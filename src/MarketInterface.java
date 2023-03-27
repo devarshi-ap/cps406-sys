@@ -152,6 +152,26 @@ public class MarketInterface {
                     System.out.println("**USER ONLY**");
             }
 
+            // sell stock (user only)
+            else if (cmd.equalsIgnoreCase("SELL")) {
+                if (isUser) {
+                    System.out.print("Enter STS : ");
+                    String sts = scanner.nextLine().toUpperCase();
+    
+                    if (Market.verifyStock(sts)) {
+                        if (investor.inPortfolio(sts)) {
+                            System.out.print("# Shares : ");
+                            int shares = scanner.nextInt();
+                            
+                            investor.sell(sts, shares);
+                        } else
+                            System.out.println("STS (" + sts + ") not in Portfolio.\n");
+                    } else
+                        System.out.println("STS (" + sts + ") not found.\n");
+                } else
+                    System.out.println("**USER ONLY**");
+            }
+
             // 🟢 get amount in wallet (user only)
             else if (cmd.equalsIgnoreCase("WALLET")) {
                 if (isUser)

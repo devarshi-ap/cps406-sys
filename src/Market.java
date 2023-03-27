@@ -16,7 +16,7 @@ public class Market {
         return stocks;
     }
 
-        /**
+    /**
      * Retrieve stock object from stocks HashMap
      * @param String sts
      * @return stock object

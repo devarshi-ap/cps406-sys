@@ -4,6 +4,9 @@
 
 ---
 
-```java
+To run this system:
 
+```bash
+$ cd src
+$ java MarketInterface.java
 ```

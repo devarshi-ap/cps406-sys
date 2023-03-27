@@ -88,10 +88,10 @@ public class Investor extends User {
                 // add to transactions
                 String txn = "BUY-" + sts.toUpperCase() + "-" + shares;
                 this.addTransaction(txn);
-    
+
                 // subtract from stock floating-shares (fewer left)
                 Market.stocks.get(sts).addToFloatingShares(0 - shares);
-    
+
                 // add stock to user's portfolio
                 this.addToPortfolio(sts, shares);
 
@@ -110,23 +110,28 @@ public class Investor extends User {
      * @param shares
      */
     public void sell(String sts, int shares) {
-        if (this.getPortfolio().containsKey(sts)) {
-            if (this.getPortfolio().get(sts) >= shares) {
-                // sts exists, investor owns stock share(s), and has more or equal amount of
-                // shares wanting to be sold, then sell shares
-                int dollar_amt = Market.stocks.get(sts).market_price * shares;
-                this.deposit(dollar_amt);
+        if (this.getPortfolio().get(sts) >= shares) {
+            int dollar_amt = Market.stocks.get(sts).market_price * shares;
+            this.deposit(dollar_amt);
 
-                // add to transactions
-                String txn = "SELL-" + sts.toUpperCase() + "-" + shares;
-                this.addTransaction(txn);
+            // add to transactions
+            String txn = "SELL-" + sts + "-" + shares;
+            this.addTransaction(txn);
 
-                // add to stock floating-shares (more available)
-                Market.stocks.get(sts).addToFloatingShares(shares);
-
-                // add stock to user's portfolio
+            // add to stock floating-shares (more available)
+            Market.stocks.get(sts).addToFloatingShares(shares);
+            
+            if (shares == this.getPortfolio().get(sts)) {
+                // remove stock from user's portfolio
                 this.removeFromPortfolio(sts);
+            } else {
+                // update stock shares
+                this.updatePortfolio(sts, this.getPortfolio().get(sts) - shares);
             }
+
+            System.out.println("Successfully sold " + shares + " shares of " + sts + "!\n");
+        } else {
+            System.out.println("Only have " + this.getPortfolio().get(sts) + " shares of " + sts + "\n");
         }
     }
 
@@ -134,7 +139,7 @@ public class Investor extends User {
      * Exports the users transctions into a text file called 'Transactions.txt'
      */
     public void exportTransactions() throws IOException {
-        if (!this.transactions.isEmpty()){
+        if (!this.transactions.isEmpty()) {
             PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
             for (String txn : this.transactions) {
                 pw.println(txn);
@@ -183,6 +188,10 @@ public class Investor extends User {
         this.portfolio.put(sts, shares);
     }
 
+    public boolean inPortfolio(String sts) {
+        return this.portfolio.keySet().contains(sts);
+    }
+
     /**
      * Remove stock from portfolio
      *
@@ -190,6 +199,16 @@ public class Investor extends User {
      */
     public void removeFromPortfolio(String sts) {
         this.portfolio.remove(sts);
+    }
+
+    /**
+     * Update stock shares in portfolio
+     *
+     * @param sts
+     * @param new_shares
+     */
+    public void updatePortfolio(String sts, int new_shares) {
+        this.portfolio.put(sts, new_shares);
     }
 
     /**
@@ -235,5 +254,4 @@ public class Investor extends User {
                 return true;
         return false;
     }
-
 }
