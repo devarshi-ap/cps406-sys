@@ -130,6 +130,9 @@ public class Investor extends User {
         }
     }
 
+    /**
+     * Exports the users transctions into a text file called 'Transactions.txt'
+     */
     public void exportTransactions() throws IOException {
         if (!this.transactions.isEmpty()){
             PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
@@ -142,34 +145,76 @@ public class Investor extends User {
             System.out.println("User has no transactions to export.\n");
     }
 
+    /**
+     * Returns the transcations to be used for exporting
+     * 
+     * @return String of transactions
+     */
     public ArrayList<String> getTransactions() {
         return this.transactions;
     }
 
+    /**
+     * Adds trancsations to the export list
+     *
+     * @param txn
+     */
     public void addTransaction(String txn) {
         this.transactions.add(txn);
     }
 
+    /**
+     * 
+     * Returns the portfolio of the user
+     * 
+     * @return Hashmap of portfolio
+     */
     public HashMap<String, Integer> getPortfolio() {
         return this.portfolio;
     }
 
+    /**
+     * Adds stock to portfolio
+     *
+     * @param sts
+     * @param shares
+     */
     public void addToPortfolio(String sts, int shares) {
         this.portfolio.put(sts, shares);
     }
 
+    /**
+     * Remove stock from portfolio
+     *
+     * @param sts
+     */
     public void removeFromPortfolio(String sts) {
         this.portfolio.remove(sts);
     }
 
+    /**
+     * Returns the watch list of the user
+     * 
+     * @return String Watchlist
+     */
     public ArrayList<String> getWatchlist() {
         return this.watchlist;
     }
 
+    /**
+     * Adds stock to watch list
+     *
+     * @param sts
+     */
     public void addToWatchlist(String sts) {
         this.watchlist.add(sts.toUpperCase());
     }
 
+    /**
+     * Remove stock from watch list
+     *
+     * @param sts
+     */
     public void removeFromWatchlist(String sts) {
         for (int i = 0; i < this.watchlist.size(); i++) {
             if (this.watchlist.get(i).equals(sts)) {
