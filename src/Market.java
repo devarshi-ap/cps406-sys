@@ -62,9 +62,9 @@ public class Market {
                         new-stock\t\t<adds a new stock into the market (ADMIN ONLY)>
                         buy\t\t\t<buy a stock (INVESTOR ONLY)>
                         sell\t\t\t<sell a stock (INVESTOR ONLY)>
-                        add-watch\t\t<add stock to watchlist (INVESTOR ONLY)>
-                        del-watch\t\t<delete stock from watchlist (INVESTOR ONLY)>
-                        get-watch\t\t<get user's watchlist (INVESTOR ONLY)>
+                        add-watchlist\t\t<add stock to watchlist (INVESTOR ONLY)>
+                        del-watchlist\t\t<delete stock from watchlist (INVESTOR ONLY)>
+                        get-watchlist\t\t<get user's watchlist (INVESTOR ONLY)>
                         get-portfolio\t\t<get user's trading portfolio (INVESTOR ONLY)>
                         wallet\t\t\t<get amount of money in user's wallet (INVESTOR ONLY)>
                         deposit\t\t\t<deposit funds into wallet (INVESTOR ONLY)>

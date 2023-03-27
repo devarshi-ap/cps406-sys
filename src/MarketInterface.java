@@ -242,18 +242,52 @@ public class MarketInterface {
 
             // 🟢 remove from watchlist (user-only)
             else if (cmd.equalsIgnoreCase("REM-WATCHLIST")) {
-                System.out.print("Enter STS : ");
-                String sts = scanner.nextLine().toUpperCase();
+                if (isUser) {
+                    System.out.print("Enter STS : ");
+                    String sts = scanner.nextLine().toUpperCase();
 
-                if (Market.verifyStock(sts)) {
-                    if (investor.inWatchlist(sts)) {
-                        investor.removeFromWatchlist(sts);
-                        System.out.println(sts + " removed from watchlist.\n");
-                    } else
-                        System.out.println(sts + " not in Watchlist.\n");
+                    if (Market.verifyStock(sts)) {
+                        if (investor.inWatchlist(sts)) {
+                            investor.removeFromWatchlist(sts);
+                            System.out.println(sts + " removed from watchlist.\n");
+                        } else
+                            System.out.println(sts + " not in Watchlist.\n");
+                    }
+                    else
+                        System.out.println("Invalid STS was entered\n");
+                } else {
+                    System.out.println("**USER ONLY**");
                 }
-                else
-                    System.out.println("Invalid STS was entered\n");
+            }
+
+            // 🟢 overwrites (toggles) stock from watchlist of investor ID (admin-only)
+            else if (cmd.equalsIgnoreCase("OVERWRITE-WATCHLIST")) {
+                if (isAdmin) {
+                    System.out.print("Enter Investor ID : ");
+                    String id = scanner.nextLine();
+
+                    if (admin.hasInvestor(Integer.valueOf(id))) {
+                        System.out.print("Enter STS : ");
+                        String sts = scanner.nextLine().toUpperCase();
+
+                        if (Market.verifyStock(sts)) {
+                            if (admin.getInvestor(Integer.valueOf(id)).inWatchlist(sts)) {
+                                admin.getInvestor(Integer.valueOf(id)).removeFromWatchlist(sts);
+                                System.out.println(sts + " removed from watchlist.\n");
+                            } else{
+                                admin.getInvestor(Integer.valueOf(id)).addToWatchlist(sts);
+                                System.out.println(sts + " added to watchlist.\n");
+                            }
+                        }
+                        else
+                            System.out.println("Invalid STS was entered\n");
+                    }
+                    else{
+                        System.out.println("Investor with ID: " + id + " not in database.\n");
+                    }
+                } else {
+                    System.out.println("**ADMIN ONLY**");
+                }
             }
 
             // 🟢 deposit funds into wallet (user only)
