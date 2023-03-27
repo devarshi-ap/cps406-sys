@@ -16,6 +16,10 @@ public class Market {
         return stocks;
     }
 
+    public Stock getStock(String sts) {
+        return stocks.get(sts.toUpperCase());
+    }
+
     /**
      * Verify stock exists
      * 
@@ -24,7 +28,7 @@ public class Market {
      * @return Boolean value corresponding to if the stock exists
      */
     public static boolean verifyStock(String sts) {
-        return stocks.containsKey(sts);
+        return stocks.containsKey(sts.toUpperCase());
     }
 
     public void addStock(String sts, Stock stock) {
