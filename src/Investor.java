@@ -54,8 +54,9 @@ public class Investor extends User {
     public void deposit(int amount) {
         if ((amount >= 0) && ((this.wallet + amount) <= 100_000_000)) {
             this.wallet += amount;
+            System.out.println("\n...Deposited!\n(new wallet : $ " + this.wallet + ")\n");
         } else {
-            System.out.println("Exceeds Wallet Max or Invalid Amount Entered!");
+            System.out.println("Exceeds Wallet Max or Invalid Amount Entered!\n");
         }
     }
 
@@ -130,19 +131,15 @@ public class Investor extends User {
     }
 
     public void exportTransactions() throws IOException {
-        
-        if (this.transactions != null){
+        if (!this.transactions.isEmpty()){
             PrintWriter pw = new PrintWriter(new FileWriter("Transactions.txt", false));
             for (String txn : this.transactions) {
-                pw.print(txn);
+                pw.println(txn);
             }
             pw.close();
-        }
-        else
-        {
-            System.out.println("User has no transactions to export.");
-        }
-        
+            System.out.println("Transactions exported successfully to Transactions.txt!\n");
+        } else
+            System.out.println("User has no transactions to export.\n");
     }
 
     public ArrayList<String> getTransactions() {

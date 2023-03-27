@@ -32,6 +32,14 @@ public class Admin extends User {
     public HashMap<Integer, Investor> getAllInvestors() {
         return this.investors;
     }
+
+    public Investor getInvestor(int id) {
+        return this.investors.get(id);
+    }
+
+    public boolean hasInvestor(int id) {
+        return this.investors.keySet().contains(id);
+    }
     /**
      * Creates a new Investor object and then adds the object to the HashMap
      * @param name

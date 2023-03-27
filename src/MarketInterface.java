@@ -77,12 +77,16 @@ public class MarketInterface {
 
             // 🟢 log transactions (user only)
             else if (cmd.equalsIgnoreCase("LOG")) {
+                System.out.println();
                 if (isUser)
                     if (investor.getTransactions() == null || investor.getTransactions().isEmpty())
-                        System.out.println("No Transactions Found.");
-                    else
+                        System.out.println("No Transactions Found.\n");
+                    else {
                         for (String txn : investor.getTransactions())
                             System.out.println("-> " + txn);
+                        System.out.println();
+                    }
+                        
                 else
                     System.out.println("**USER ONLY**");
             }
@@ -151,7 +155,7 @@ public class MarketInterface {
             // 🟢 get amount in wallet (user only)
             else if (cmd.equalsIgnoreCase("WALLET")) {
                 if (isUser)
-                    System.out.println("\nWallet Balance : \t $" + investor.getWallet() + "\n");
+                    System.out.println("\nWallet Balance :\t$ " + investor.getWallet() + "\n");
                 else
                     System.out.println("**USER ONLY**");
             }
@@ -168,19 +172,24 @@ public class MarketInterface {
                     System.out.println("STS (" + sts + ") not found.");
             }
             
-            // print watchlist (user-only)
+            // 🟢 print watchlist (user-only)
             else if (cmd.equalsIgnoreCase("WATCHLIST")) {
-                if (isUser)
-                    for (String item: investor.getWatchlist())
-                        System.out.println("- " + item);
-                else
+                if (isUser) {
+                    if (investor.getWatchlist().isEmpty()) {
+                        System.out.println("No items in Watchlist.");
+                    } else {
+                        for (String item: investor.getWatchlist())
+                            System.out.println("- " + item);
+                    }
+                    System.out.println();
+                } else
                     System.out.println("**USER ONLY**");
             }
 
             // print portfolio (user-only)
             else if (cmd.equalsIgnoreCase("PORTFOLIO")) {
                 if (isUser) {
-                    System.out.println("Portfolio ----------+");
+                    System.out.println("Portfolio --------------+");
                     for(String sts: investor.getPortfolio().keySet()) {
                         int shares = investor.getPortfolio().get(sts);
                         int dollar_value = shares * market.getStock(sts).market_price * shares;
@@ -191,7 +200,7 @@ public class MarketInterface {
                     System.out.println("**USER ONLY**");
             }
 
-            // add to watchlist (user-only)
+            // 🟢 add to watchlist (user-only)
             else if (cmd.equalsIgnoreCase("ADD-WATCHLIST")) {
                 if (isUser) {
                     System.out.print("Enter STS : ");
@@ -202,30 +211,70 @@ public class MarketInterface {
                             investor.addToWatchlist(sts);
                             System.out.println(sts + " added to watchlist!\n");
                         } else {
-                            System.out.println(sts + " already in Watchlist.");
+                            System.out.println(sts + " already in Watchlist.\n");
                         }
                     } else
-                        System.out.println("Invalid STS was entered");
+                        System.out.println("Invalid STS was entered\n");
                 } else
                     System.out.println("**USER ONLY**");
             }
 
-            // remove from watchlist (user-only)
+            // 🟢 remove from watchlist (user-only)
             else if (cmd.equalsIgnoreCase("REM-WATCHLIST")) {
                 System.out.print("Enter STS : ");
-                String sts = scanner.nextLine();
+                String sts = scanner.nextLine().toUpperCase();
 
-                if (Market.verifyStock(sts) && investor.inWatchlist(sts)) {
-                    investor.removeFromWatchlist(sts);
-                    System.out.println(sts + " removed from watchlist.\n");
+                if (Market.verifyStock(sts)) {
+                    if (investor.inWatchlist(sts)) {
+                        investor.removeFromWatchlist(sts);
+                        System.out.println(sts + " removed from watchlist.\n");
+                    } else
+                        System.out.println(sts + " not in Watchlist.\n");
                 }
                 else
-                    System.out.println("Invalid STS was entered");
+                    System.out.println("Invalid STS was entered\n");
+            }
+
+            // 🟢 deposit funds into wallet (user only)
+            else if (cmd.equalsIgnoreCase("DEPOSIT")) {
+                if (isUser) {
+                    System.out.print("Deposit amount : ");
+                    String amount = scanner.nextLine();
+
+                    if (amount.length() > 9 || Integer.valueOf(amount) > 100_000_000)
+                        System.out.println("Deposit amount too large.");
+                    else
+                        investor.deposit(Integer.valueOf(amount));
+
+                } else {
+                    System.out.println("**USER ONLY**");
+                }
+            }
+
+            // 🟢 export transactions to file (user only)
+            else if (cmd.equalsIgnoreCase("EXPORT")) {
+                if (isUser)
+                    investor.exportTransactions();
+                else
+                    System.out.println("**INVESTOR ONLY**");
+            }
+
+            // 🟢 list all system users (admin only)
+            else if (cmd.equalsIgnoreCase("list-users")) {
+                if (isAdmin)
+                    if (!admin.getAllInvestors().isEmpty()) {
+                        for(int id: admin.getAllInvestors().keySet())
+                            System.out.println(admin.getInvestor(id));
+                        System.out.println();
+                    } else
+                        System.out.println("No Users found in system.\n");
+                else
+                    System.out.println("**ADMIN ONLY**");
             }
 
             // invalid commmand
             else {
-                System.out.println("Please enter a valid command. See command 'man' for the manual page.");
+                System.out.println("Please enter a valid command. See command 'man' for the manual page.\n");
             }
 
         } while (!cmd.equals("exit"));
