@@ -75,17 +75,16 @@ public class MarketInterface {
                 market.manpage();
             }
 
-            // 🟡 log transactions (user only)
+            // 🟢 log transactions (user only)
             else if (cmd.equalsIgnoreCase("LOG")) {
                 if (isAdmin)
                     System.out.println("**INVESTOR ONLY**");
                 else
-                    if (investor.getTransactions() == null || investor.getTransactions().isEmpty()) {
+                    if (investor.getTransactions() == null || investor.getTransactions().isEmpty())
                         System.out.println("No Transactions Found.");
-                    } else {
+                    else
                         for (String txn : investor.getTransactions())
                             System.out.println("-> " + txn);
-                    }
             }
             
             // 🟢 list all stocks
@@ -128,13 +127,11 @@ public class MarketInterface {
                     } else {
                         System.out.println("STS (" + sts + ") already exists.");
                     }
-
-                } else {
+                } else
                     System.out.println("**INVESTOR ONLY**");
-                }
             }
 
-            // 🟡 buy stock (user only)
+            // 🟢 buy stock (user only)
             else if (cmd.equalsIgnoreCase("BUY")) {
                 System.out.print("Enter STS : ");
                 String sts = scanner.nextLine();
@@ -144,13 +141,11 @@ public class MarketInterface {
                     int shares = scanner.nextInt();
 
                     investor.buy(sts.toUpperCase(), shares);
-
-                } else {
+                } else
                     System.out.println("STS (" + sts + ") not found.");
-                }
             }
 
-            // 🟡 get amount in wallet (user only)
+            // 🟢 get amount in wallet (user only)
             else if (cmd.equalsIgnoreCase("WALLET")) {
                 if (isAdmin)
                     System.out.println("**INVESTOR ONLY**");
