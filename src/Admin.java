@@ -33,13 +33,28 @@ public class Admin extends User {
         return this.investors;
     }
 
+
+    /**
+    * Find and retrieve an investor object from 
+    * the investors HashMap by using an id
+    * @param int id 
+    * @return investor object
+    */
     public Investor getInvestor(int id) {
         return this.investors.get(id);
     }
 
+
+    /** 
+    * Check in the investors HashMap if investor exists using a given id
+    * Return True if investor exists, False otherwise
+    * @param int id
+    * @return True if investor exists, False otherwise
+    */
     public boolean hasInvestor(int id) {
         return this.investors.keySet().contains(id);
     }
+
     /**
      * Creates a new Investor object and then adds the object to the HashMap
      * @param name

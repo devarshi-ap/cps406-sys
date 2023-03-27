@@ -223,6 +223,12 @@ public class Investor extends User {
         }
     }
 
+    /**
+     * Returns boolean of whether or not stock is in watchlist
+     * 
+     * @param sts
+     * @return true/false if watchlist contains stock
+     */
     public boolean inWatchlist(String sts) {
         for (int i = 0; i < this.watchlist.size(); i++)
             if (this.watchlist.get(i).equals(sts))

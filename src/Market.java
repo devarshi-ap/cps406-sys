@@ -16,6 +16,11 @@ public class Market {
         return stocks;
     }
 
+        /**
+     * Retrieve stock object from stocks HashMap
+     * @param String sts
+     * @return stock object
+     */
     public Stock getStock(String sts) {
         return stocks.get(sts.toUpperCase());
     }
@@ -82,6 +87,10 @@ public class Market {
         return idCounter++;
     }
 
+    /**
+     * Reads stock data from file and adds to stocks hash map
+     * 
+     */
     public void readStocks() throws FileNotFoundException {
         File f = new File("utils/stocks.txt");
         Scanner sc = new Scanner(f);

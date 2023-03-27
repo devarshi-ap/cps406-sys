@@ -19,6 +19,11 @@ public class Stock {
         this.floating_shares = outstanding_shares;
     }
 
+/**
+     * Returns a Stock object as string
+     * 
+     * @return String of prices of Stock object
+     */
     public String toString() {
         return "------+ " + this.name + " (" + this.sts + ")"
         + "\nMarket Price: \t$" + this.market_price
