@@ -119,14 +119,11 @@ public class MarketInterface {
                     System.out.print("Low Price : ");
                     int low_price = scanner.nextInt();
 
-                    System.out.print("Volume : ");
-                    int volume = scanner.nextInt();
-
-                    System.out.print("# Outstanding Shares : ");
-                    int outstanding_shares = scanner.nextInt();
+                    System.out.print("# Initial Floating Shares : ");
+                    int initial_shares = scanner.nextInt();
                     
                     if (!Market.verifyStock(sts)) {
-                        market.addStock(sts, new Stock(stock_name, sts, new int[] {market_price, open_price, close_price, high_price, low_price}, volume, outstanding_shares));
+                        market.addStock(sts, new Stock(stock_name, sts, new int[] {market_price, open_price, close_price, high_price, low_price}, initial_shares));
                         System.out.println(sts + " successfully added!");
                     } else {
                         System.out.println("STS (" + sts + ") already exists.");
@@ -139,9 +136,28 @@ public class MarketInterface {
 
             // 🟡 buy stock (user only)
             else if (cmd.equalsIgnoreCase("BUY")) {
-                System.out.println("Enter STS : ");
+                System.out.print("Enter STS : ");
                 String sts = scanner.nextLine();
+
+                if (Market.verifyStock(sts.toUpperCase())) {
+                    System.out.print("# Shares : ");
+                    int shares = scanner.nextInt();
+
+                    investor.buy(sts.toUpperCase(), shares);
+
+                } else {
+                    System.out.println("STS (" + sts + ") not found.");
+                }
             }
+
+            // 🟡 get amount in wallet (user only)
+            else if (cmd.equalsIgnoreCase("WALLET")) {
+                if (isAdmin)
+                    System.out.println("**INVESTOR ONLY**");
+                else
+                    System.out.println("\nWallet Balance : \t $" + investor.getWallet() + "\n");
+            } 
+
             // invalid commmand
             else {
                 System.out.println("Please enter a valid command. See command 'man' for the manual page.");
