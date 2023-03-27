@@ -213,7 +213,7 @@ public class MarketInterface {
             // remove from watchlist (user-only)
             else if (cmd.equalsIgnoreCase("REM-WATCHLIST")) {
                 System.out.print("Enter STS : ");
-                String sts = scanner.nextLine();
+                String sts = scanner.nextLine().toUpperCase();
 
                 if (Market.verifyStock(sts) && investor.inWatchlist(sts)) {
                     investor.removeFromWatchlist(sts);
