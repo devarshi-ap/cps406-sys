@@ -195,11 +195,15 @@ public class MarketInterface {
             else if (cmd.equalsIgnoreCase("ADD-WATCHLIST")) {
                 if (isUser) {
                     System.out.print("Enter STS : ");
-                    String sts = scanner.nextLine();
+                    String sts = scanner.nextLine().toUpperCase();
 
-                    if (Market.verifyStock(sts) && !investor.inWatchlist(sts)) {
-                        investor.addToWatchlist(sts);
-                        System.out.println(sts + " added to watchlist!\n");
+                    if (Market.verifyStock(sts)) {
+                        if (!investor.inWatchlist(sts)) {
+                            investor.addToWatchlist(sts);
+                            System.out.println(sts + " added to watchlist!\n");
+                        } else {
+                            System.out.println(sts + " already in Watchlist.");
+                        }
                     } else
                         System.out.println("Invalid STS was entered");
                 } else
