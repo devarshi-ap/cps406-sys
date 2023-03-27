@@ -13,17 +13,6 @@ else if (cmd.equalsIgnoreCase("EXPORT")) {
         investor.exportTransactions();
 }
 
-// 🟡 get prices of given stock
-else if (cmd.equalsIgnoreCase("STOCK-PRICE")) {
-    System.out.print("Enter STS  : ");
-    String sts = scanner.nextLine();
-
-    if (Market.verifyStock(sts))
-        System.out.print(market.getAllStocks().get(cmd));
-    else
-        System.out.println("STS (" + sts + ") not found.");
-}
-
 // 🟡 deposit funds into wallet (user only)
 else if (cmd.equalsIgnoreCase("DEPOSIT")) {
     if (isAdmin) {
@@ -34,4 +23,5 @@ else if (cmd.equalsIgnoreCase("DEPOSIT")) {
 
         investor.deposit(Integer.valueOf(cmd));
     }
+}
 ```
