@@ -170,7 +170,7 @@ public class Investor extends User {
     }
 
     public void addToWatchlist(String sts) {
-        this.watchlist.add(sts);
+        this.watchlist.add(sts.toUpperCase());
     }
 
     public void removeFromWatchlist(String sts) {
@@ -179,6 +179,13 @@ public class Investor extends User {
                 this.watchlist.remove(i);
             }
         }
+    }
+
+    public boolean inWatchlist(String sts) {
+        for (int i = 0; i < this.watchlist.size(); i++)
+            if (this.watchlist.get(i) == sts)
+                return true;
+        return false;
     }
 
 }
