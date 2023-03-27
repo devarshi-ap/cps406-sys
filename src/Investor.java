@@ -183,7 +183,7 @@ public class Investor extends User {
 
     public boolean inWatchlist(String sts) {
         for (int i = 0; i < this.watchlist.size(); i++)
-            if (this.watchlist.get(i) == sts)
+            if (this.watchlist.get(i) == sts.toUpperCase())
                 return true;
         return false;
     }
