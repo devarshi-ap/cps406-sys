@@ -136,7 +136,7 @@ public class MarketInterface {
                 System.out.print("Enter STS : ");
                 String sts = scanner.nextLine();
 
-                if (Market.verifyStock(sts.toUpperCase())) {
+                if (Market.verifyStock(sts)) {
                     System.out.print("# Shares : ");
                     int shares = scanner.nextInt();
 
@@ -151,7 +151,30 @@ public class MarketInterface {
                     System.out.println("**INVESTOR ONLY**");
                 else
                     System.out.println("\nWallet Balance : \t $" + investor.getWallet() + "\n");
-            } 
+            }
+
+            // 🟢 get prices of given stock
+            else if (cmd.equalsIgnoreCase("STOCK-PRICE")) {
+                System.out.print("Enter STS  : ");
+                String sts = scanner.nextLine();
+                System.out.println();
+
+                if (Market.verifyStock(sts))
+                    System.out.println(market.getStock(sts));
+                else
+                    System.out.println("STS (" + sts + ") not found.");
+            }
+            
+            // 🟢 print watchlist
+            else if (cmd.equalsIgnoreCase("WATCHLIST")) {
+                for (String item: investor.getWatchlist())
+                    System.out.println("- " + item);
+            }
+            
+            else if (cmd.equalsIgnoreCase("PORTFOLIO")) {
+                System.out.println(investor.getPortfolio());
+            }
+
 
             // invalid commmand
             else {
