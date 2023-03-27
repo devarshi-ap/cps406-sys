@@ -3,12 +3,12 @@ public class Stock {
      * Instance variables for Stock objects
      */
     String name, sts;
-    int market_price, open_price, close_price, high_price, low_price, volume, outstanding_shares, floating_shares;
+    int market_price, open_price, close_price, high_price, low_price, floating_shares;
 
     /**
      * Instantiate a Stock object
      */
-    public Stock(String name, String sts, int[] prices, int volume, int outstanding_shares) {
+    public Stock(String name, String sts, int[] prices, int outstanding_shares) {
         this.name = name;
         this.sts = sts;
         this.market_price = prices[0];
@@ -16,9 +16,7 @@ public class Stock {
         this.close_price = prices[2];
         this.high_price = prices[3];
         this.low_price = prices[4];
-        this.volume = volume;
-        this.outstanding_shares = outstanding_shares;
-        this.floating_shares = 0;
+        this.floating_shares = outstanding_shares;
     }
 
     public String toString() {
@@ -46,24 +44,6 @@ public class Stock {
      */
     public int[] getPrices() {
         return new int[]{this.market_price, this.open_price, this.close_price, this.high_price, this.low_price};
-    }
-
-    /**
-     * Return volume of stock
-     * 
-     * @return   volume   integer value of stock volume
-     */
-    public int getVolume() {
-        return this.volume;
-    }
-
-    /**
-     * Increment (shares >= 0)/Decrement (shares < 0)  the outstanding_share value of Stock
-     * 
-     * @param   value   integer number of shares should be incremented/decremented by
-     */
-    public void addToOutstandingShares(int shares) {
-        this.outstanding_shares += shares;
     }
 
     /**
