@@ -197,7 +197,7 @@ public class MarketInterface {
                     System.out.print("Enter STS : ");
                     String sts = scanner.nextLine();
 
-                    if (Market.verifyStock(sts) && investor.inWatchlist(sts)) {
+                    if (Market.verifyStock(sts) && !investor.inWatchlist(sts)) {
                         investor.addToWatchlist(sts);
                         System.out.println(sts + " added to watchlist!\n");
                     } else
