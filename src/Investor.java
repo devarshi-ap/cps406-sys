@@ -9,7 +9,8 @@ public class Investor extends User {
      * Instance variables for Investor objects
      */
     private int wallet;
-    private ArrayList<String> transactions, watchlist = new ArrayList<String>();
+    private ArrayList<String> transactions = new ArrayList<String>();
+    private ArrayList<String> watchlist = new ArrayList<String>();
     private HashMap<String, Integer> portfolio = new HashMap<String, Integer>();
 
     /**
@@ -54,7 +55,7 @@ public class Investor extends User {
         if ((amount >= 0) && ((this.wallet + amount) <= 100_000_000)) {
             this.wallet += amount;
         } else {
-            System.out.println("Amount must be positive integer & Wallet musn't exceed $100 Million after Deposit!");
+            System.out.println("Exceeds Wallet Max or Invalid Amount Entered!");
         }
     }
 
@@ -66,11 +67,7 @@ public class Investor extends User {
      * @param amount
      */
     public void withdraw(int amount) {
-        if ((amount >= 0) && ((this.wallet - amount) >= 0)) {
-            this.wallet -= amount;
-        } else {
-            System.out.println("Amount must be positive integer & Wallet must be positive after Withdraw!");
-        }
+        this.wallet -= amount;
     }
 
     /**
@@ -80,22 +77,28 @@ public class Investor extends User {
      * @param shares
      */
     public void buy(String sts, int shares) {
-        if (Market.verifyStock(sts)) { //Might have to change it to market not Market
-            if (shares <= Market.stocks.get(sts).floating_shares) {
-                // sts exists and enough floating shares present, buy stock
-                int dollar_amt = Market.stocks.get(sts).market_price * shares;
+        if (shares <= Market.stocks.get(sts).floating_shares) {
+            // sts exists and enough floating shares present, buy stock
+            int dollar_amt = Market.stocks.get(sts).market_price * shares;
+
+            if ((dollar_amt >= 0) && ((this.wallet - dollar_amt) >= 0)) {
                 this.withdraw(dollar_amt);
 
                 // add to transactions
                 String txn = "BUY-" + sts.toUpperCase() + "-" + shares;
                 this.addTransaction(txn);
-
+    
                 // subtract from stock floating-shares (fewer left)
                 Market.stocks.get(sts).addToFloatingShares(0 - shares);
-
+    
                 // add stock to user's portfolio
                 this.addToPortfolio(sts, shares);
+
+                System.out.println("Successfully bought " + shares + " shares of " + sts + "!\n");
+            } else {
+                System.out.println("Insufficient Funds or Invalid Amount Entered!\n");
             }
+
         }
     }
 
@@ -106,7 +109,7 @@ public class Investor extends User {
      * @param shares
      */
     public void sell(String sts, int shares) {
-        if (Market.verifyStock(sts) && this.getPortfolio().containsKey(sts)) {
+        if (this.getPortfolio().containsKey(sts)) {
             if (this.getPortfolio().get(sts) >= shares) {
                 // sts exists, investor owns stock share(s), and has more or equal amount of
                 // shares wanting to be sold, then sell shares
