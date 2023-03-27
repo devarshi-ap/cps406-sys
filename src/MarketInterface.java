@@ -152,7 +152,7 @@ public class MarketInterface {
                     System.out.println("**USER ONLY**");
             }
 
-            // sell stock (user only)
+            // 🟢 sell stock (user only)
             else if (cmd.equalsIgnoreCase("SELL")) {
                 if (isUser) {
                     System.out.print("Enter STS : ");
@@ -206,7 +206,7 @@ public class MarketInterface {
                     System.out.println("**USER ONLY**");
             }
 
-            // print portfolio (user-only)
+            // 🟢 print portfolio (user-only)
             else if (cmd.equalsIgnoreCase("PORTFOLIO")) {
                 if (isUser) {
                     System.out.println("Portfolio --------------+");
