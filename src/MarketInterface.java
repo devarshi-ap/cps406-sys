@@ -235,8 +235,9 @@ public class MarketInterface {
                         }
                     } else
                         System.out.println("Invalid STS was entered\n");
-                } else
+                } else {
                     System.out.println("**USER ONLY**");
+                }
             }
 
             // 🟢 remove from watchlist (user-only)
