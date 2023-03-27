@@ -65,7 +65,7 @@ public class MarketInterface {
             System.out.print("> ");
             cmd = scanner.nextLine();
 
-            // 🟢 EMPTY (do nothing)
+            // 🟢 (empty -> do nothing)
             if (cmd == null || cmd.equals("")) {
                 System.out.println("");
             }
@@ -78,77 +78,72 @@ public class MarketInterface {
             // 🟡 log transactions (user only)
             else if (cmd.equalsIgnoreCase("LOG")) {
                 if (isAdmin)
-                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
+                    System.out.println("**INVESTOR ONLY**");
                 else
-                    System.out.println(investor.getTransactions());
+                    if (investor.getTransactions() == null || investor.getTransactions().isEmpty()) {
+                        System.out.println("No Transactions Found.");
+                    } else {
+                        for (String txn : investor.getTransactions())
+                            System.out.println("-> " + txn);
+                    }
             }
-
-            // 🟡 export transactions to file (user only)
-            else if (cmd.equalsIgnoreCase("EXPORT")) {
-                if (isAdmin)
-                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                else
-                    investor.exportTransactions();
-            }
-
-            // 🟡 add new stock (admin only)
-            else if (cmd.equalsIgnoreCase("NEW-STOCK")) {
-                if (isAdmin) {
-                    //
-                } else {
-                    System.out.println("Cannot use this command in this context. (ADMIN ONLY).");
-                }
-            }
-
-            // 🟡 get prices of given stock
-            else if (cmd.equalsIgnoreCase("STOCK-PRICE")) {
-                System.out.print("Enter STS  : ");
-                String sts = scanner.nextLine();
-
-                if (Market.verifyStock(sts))
-                    System.out.print(market.getAllStocks().get(cmd));
-                else
-                    System.out.println("STS (" + sts + ") not found.");
-            }
-
-            // 🟡 list all stocks
+            
+            // 🟢 list all stocks
             else if (cmd.equalsIgnoreCase("LIST-STOCKS")) {
+                System.out.println();
                 for (Stock stock : market.getAllStocks().values())
                     System.out.println(stock);
             }
             
-            // 🟡 get stock volume
-            else if (cmd.equalsIgnoreCase("VOLUME")) {
-                System.out.print("Please enter the Stock Ticker Symbol (STS) of your desired stock. \n> ");
-                String sts = scanner.nextLine();
+            // 🟢 add new stock (admin only)
+            else if (cmd.equalsIgnoreCase("NEW-STOCK")) {
+                if (isAdmin) {
+                    System.out.print("Enter details for new Stock.\nName : ");
+                    String stock_name = scanner.nextLine();
 
-                if (Market.verifyStock(sts)) {
-                    Stock stock = market.getAllStocks().get(sts);
-                    System.out.println(sts + " Volume : " + stock.getVolume() + "\n");
+                    System.out.print("Enter details for new Stock.\nSTS : ");
+                    String sts = scanner.nextLine();
+
+                    System.out.print("Market Price : ");
+                    int market_price = scanner.nextInt();
+                    
+                    System.out.print("Open Price : ");
+                    int open_price = scanner.nextInt();
+
+                    System.out.print("Closing Price : ");
+                    int close_price = scanner.nextInt();
+
+                    System.out.print("High Price : ");
+                    int high_price = scanner.nextInt();
+
+                    System.out.print("Low Price : ");
+                    int low_price = scanner.nextInt();
+
+                    System.out.print("Volume : ");
+                    int volume = scanner.nextInt();
+
+                    System.out.print("# Outstanding Shares : ");
+                    int outstanding_shares = scanner.nextInt();
+                    
+                    if (!Market.verifyStock(sts)) {
+                        market.addStock(sts, new Stock(stock_name, sts, new int[] {market_price, open_price, close_price, high_price, low_price}, volume, outstanding_shares));
+                        System.out.println(sts + " successfully added!");
+                    } else {
+                        System.out.println("STS (" + sts + ") already exists.");
+                    }
+
                 } else {
-                    System.out.println("STS (" + sts + ") not found.");
+                    System.out.println("**INVESTOR ONLY**");
                 }
             }
-            
-            // 🟡 get amount in wallet (user only)
-            else if (cmd.equalsIgnoreCase("WALLET")) {
-                if (isAdmin)
-                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                else
-                    System.out.println("Your current balance is : \t $" + investor.getWallet());
-            } 
-            
-            // 🟡 deposit funds into wallet (user only)
-            else if (cmd.equalsIgnoreCase("DEPOSIT")) {
-                if (isAdmin) {
-                    System.out.println("Cannot use this command in this context. (INVESTOR ONLY).");
-                } else {
-                    System.out.println("Please enter the amount that you would like to deposit. \n> ");
-                    cmd = scanner.nextLine();
 
-                    investor.deposit(Integer.valueOf(cmd));
-                }
-            } else {
+            // 🟡 buy stock (user only)
+            else if (cmd.equalsIgnoreCase("BUY")) {
+                System.out.println("Enter STS : ");
+                String sts = scanner.nextLine();
+            }
+            // invalid commmand
+            else {
                 System.out.println("Please enter a valid command. See command 'man' for the manual page.");
             }
 

@@ -9,8 +9,8 @@ public class Investor extends User {
      * Instance variables for Investor objects
      */
     private int wallet;
-    private ArrayList<String> transactions, watchlist;
-    private HashMap<String, Integer> portfolio;
+    private ArrayList<String> transactions, watchlist = new ArrayList<String>();
+    private HashMap<String, Integer> portfolio = new HashMap<String, Integer>();
 
     /**
      * Instantiate a Investor object
