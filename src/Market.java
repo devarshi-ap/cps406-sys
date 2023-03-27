@@ -51,7 +51,6 @@ public class Market {
                         export\t\t\t<exports file containing user's log of transactions (INVESTOR ONLY)>
                         stock-price\t\t<gets relevant prices of a given stock>
                         new-stock\t\t<adds a new stock into the market (ADMIN ONLY)>
-                        volume\t\t\t<get volume of a stock>
                         buy\t\t\t<buy a stock (INVESTOR ONLY)>
                         sell\t\t\t<sell a stock (INVESTOR ONLY)>
                         add-watch\t\t<add stock to watchlist (INVESTOR ONLY)>
@@ -80,7 +79,7 @@ public class Market {
     }
 
     public void readStocks() throws FileNotFoundException {
-        File f = new File("src/stocks.txt");
+        File f = new File("utils/stocks.txt");
         Scanner sc = new Scanner(f);
 
         while (sc.hasNextLine()) {
@@ -91,7 +90,7 @@ public class Market {
             data = line.split(",");
             int[] prices = { Integer.valueOf(data[2]), Integer.valueOf(data[3]), Integer.valueOf(data[4]),
                     Integer.valueOf(data[5]), Integer.valueOf(data[6]) };
-            stock = new Stock(data[0], data[1], prices, Integer.valueOf(data[7]), Integer.valueOf(data[8]));
+            stock = new Stock(data[0], data[1], prices, Integer.valueOf(data[8]));
             stocks.put(data[1], stock);
         }
 
