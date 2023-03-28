@@ -330,12 +330,13 @@ public class MarketInterface {
 
             // invalid commmand
             else {
-                System.out.println("Please enter a valid command. See command 'man' for the manual page.");
+                if(!cmd.equalsIgnoreCase("exit"))
+                    System.out.println("Please enter a valid command. See command 'man' for the manual page.");
             }
 
             System.out.println();
 
-        } while (!cmd.equals("exit"));
+        } while (!cmd.equalsIgnoreCase("exit"));
 
         scanner.close();
     }
