@@ -55,25 +55,30 @@ public class Market {
                 """
                         Manual Page
                         -----------------------------------------------+
-                        exit\t\t\t<exits market program>
-                        log\t\t\t<displays user's recent transactions (INVESTOR ONLY)>
-                        export\t\t\t<exports file containing user's log of transactions (INVESTOR ONLY)>
-                        stock-price\t\t<gets relevant prices of a given stock>
-                        new-stock\t\t<adds a new stock into the market (ADMIN ONLY)>
-                        buy\t\t\t<buy a stock (INVESTOR ONLY)>
-                        sell\t\t\t<sell a stock (INVESTOR ONLY)>
-                        add-watch\t\t<add stock to watchlist (INVESTOR ONLY)>
-                        del-watch\t\t<delete stock from watchlist (INVESTOR ONLY)>
-                        get-watch\t\t<get user's watchlist (INVESTOR ONLY)>
-                        get-portfolio\t\t<get user's trading portfolio (INVESTOR ONLY)>
-                        wallet\t\t\t<get amount of money in user's wallet (INVESTOR ONLY)>
-                        deposit\t\t\t<deposit funds into wallet (INVESTOR ONLY)>
-                        withdraw\t\t<withdraw funds from wallet (INVESTOR ONLY)>
-                        man\t\t\t<displays the manual page for this market system>
-                        overwrite-watchlist\t<overwrites data on an investor's watchlist (ADMIN ONLY)>
-                        list-users\t\t<displays a list of all user's in the market (ADMIN ONLY)>
-                        remove-user\t\t<removes a user from the market (ADMIN ONLY)>
+                        
                         list-stocks\t\t<displays a list of all the stocks in the market>
+                        get-stock\t\t<gets relevant prices of a given stock>
+                        man\t\t\t<displays the manual page for this market system>
+                        exit\t\t\t<exits market program>
+                        
+                        ---> INVESTOR-ONLY
+                        wallet\t\t\t<get amount of money in user's wallet>
+                        buy\t\t\t<buy a stock>
+                        sell\t\t\t<sell a stock>
+                        log\t\t\t<displays user's recent transactions>
+                        export\t\t\t<exports file containing user's log of transactions>
+                        watch-add\t\t<add stock to watchlist>
+                        watch-rem\t\t<remove stock from watchlist>
+                        watchlist\t\t<get user's watchlist>
+                        portfolio\t\t<get user's trading portfolio>
+                        deposit\t\t\t<deposit funds into wallet>
+                        
+                        ---> ADMIN-ONLY
+                        new-stock\t\t<adds a new stock into the market>
+                        list-users\t\t<displays a list of all user's in the market>
+                        overwrite-watchlist\t<overwrites data on an investor's watchlist>
+                        *remove-user\t\t<removes a user from the market>
+
                         -----------------------------------------------+
                         """);
     }

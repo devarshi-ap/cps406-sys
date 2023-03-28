@@ -1,7 +1,8 @@
-import java.io.IOException;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class MarketInterface {
+
     public static void main(String[] args) throws IOException {
         Market market = new Market();
         market.readStocks();
@@ -80,7 +81,7 @@ public class MarketInterface {
                 System.out.println();
                 if (isUser)
                     if (investor.getTransactions() == null || investor.getTransactions().isEmpty())
-                        System.out.println("No Transactions Found.\n");
+                        System.out.println("No Transactions Found.");
                     else {
                         for (String txn : investor.getTransactions())
                             System.out.println("-> " + txn);
@@ -165,9 +166,9 @@ public class MarketInterface {
                             
                             investor.sell(sts, shares);
                         } else
-                            System.out.println("STS (" + sts + ") not in Portfolio.\n");
+                            System.out.println("STS (" + sts + ") not in Portfolio.");
                     } else
-                        System.out.println("STS (" + sts + ") not found.\n");
+                        System.out.println("STS (" + sts + ") not found.");
                 } else
                     System.out.println("**USER ONLY**");
             }
@@ -175,13 +176,13 @@ public class MarketInterface {
             // 🟢 get amount in wallet (user only)
             else if (cmd.equalsIgnoreCase("WALLET")) {
                 if (isUser)
-                    System.out.println("\nWallet Balance :\t$ " + investor.getWallet() + "\n");
+                    System.out.println("\nWallet Balance :\t$ " + investor.getWallet());
                 else
                     System.out.println("**USER ONLY**");
             }
 
             // 🟢 get prices of given stock
-            else if (cmd.equalsIgnoreCase("STOCK-PRICE")) {
+            else if (cmd.equalsIgnoreCase("GET-STOCK")) {
                 System.out.print("Enter STS  : ");
                 String sts = scanner.nextLine();
                 System.out.println();
@@ -221,7 +222,7 @@ public class MarketInterface {
             }
 
             // 🟢 add to watchlist (user-only)
-            else if (cmd.equalsIgnoreCase("ADD-WATCHLIST")) {
+            else if (cmd.equalsIgnoreCase("WATCH-ADD")) {
                 if (isUser) {
                     System.out.print("Enter STS : ");
                     String sts = scanner.nextLine().toUpperCase();
@@ -229,31 +230,31 @@ public class MarketInterface {
                     if (Market.verifyStock(sts)) {
                         if (!investor.inWatchlist(sts)) {
                             investor.addToWatchlist(sts);
-                            System.out.println(sts + " added to watchlist!\n");
+                            System.out.println(sts + " added to watchlist!");
                         } else {
-                            System.out.println(sts + " already in Watchlist.\n");
+                            System.out.println(sts + " already in Watchlist.");
                         }
                     } else
-                        System.out.println("Invalid STS was entered\n");
+                        System.out.println("Invalid STS was entered");
                 } else {
                     System.out.println("**USER ONLY**");
                 }
             }
 
             // 🟢 remove from watchlist (user-only)
-            else if (cmd.equalsIgnoreCase("REM-WATCHLIST")) {
+            else if (cmd.equalsIgnoreCase("WATCH-REM")) {
                 System.out.print("Enter STS : ");
                 String sts = scanner.nextLine().toUpperCase();
 
                 if (Market.verifyStock(sts)) {
                     if (investor.inWatchlist(sts)) {
                         investor.removeFromWatchlist(sts);
-                        System.out.println(sts + " removed from watchlist.\n");
+                        System.out.println(sts + " removed from watchlist.");
                     } else
-                        System.out.println(sts + " not in Watchlist.\n");
+                        System.out.println(sts + " not in Watchlist.");
                 }
                 else
-                    System.out.println("Invalid STS was entered\n");
+                    System.out.println("Invalid STS was entered");
             }
 
             // 🟢 deposit funds into wallet (user only)
@@ -288,15 +289,17 @@ public class MarketInterface {
                             System.out.println(admin.getInvestor(id));
                         System.out.println();
                     } else
-                        System.out.println("No Users found in system.\n");
+                        System.out.println("No Users found in system.");
                 else
                     System.out.println("**ADMIN ONLY**");
             }
 
             // invalid commmand
             else {
-                System.out.println("Please enter a valid command. See command 'man' for the manual page.\n");
+                System.out.println("Please enter a valid command. See command 'man' for the manual page.");
             }
+
+            System.out.println();
 
         } while (!cmd.equals("exit"));
 
