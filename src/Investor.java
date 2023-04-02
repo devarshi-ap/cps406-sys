@@ -120,7 +120,7 @@ public class Investor extends User {
 
             // add to stock floating-shares (more available)
             Market.stocks.get(sts).addToFloatingShares(shares);
-            
+
             if (shares == this.getPortfolio().get(sts)) {
                 // remove stock from user's portfolio
                 this.removeFromPortfolio(sts);

@@ -18,6 +18,7 @@ public class Market {
 
     /**
      * Retrieve stock object from stocks HashMap
+     * 
      * @param String sts
      * @return stock object
      */
@@ -55,12 +56,12 @@ public class Market {
                 """
                         Manual Page
                         -----------------------------------------------+
-                        
+
                         list-stocks\t\t<displays a list of all the stocks in the market>
                         get-stock\t\t<gets relevant prices of a given stock>
                         man\t\t\t<displays the manual page for this market system>
                         exit\t\t\t<exits market program>
-                        
+
                         ---> INVESTOR-ONLY
                         wallet\t\t\t<get amount of money in user's wallet>
                         buy\t\t\t<buy a stock>
@@ -72,7 +73,7 @@ public class Market {
                         watchlist\t\t<get user's watchlist>
                         portfolio\t\t<get user's trading portfolio>
                         deposit\t\t\t<deposit funds into wallet>
-                        
+
                         ---> ADMIN-ONLY
                         new-stock\t\t<adds a new stock into the market>
                         list-users\t\t<displays a list of all user's in the market>

@@ -87,18 +87,18 @@ public class MarketInterface {
                             System.out.println("-> " + txn);
                         System.out.println();
                     }
-                        
+
                 else
                     System.out.println("**USER ONLY**");
             }
-            
+
             // 🟢 list all stocks
             else if (cmd.equalsIgnoreCase("LIST-STOCKS")) {
                 System.out.println();
                 for (Stock stock : market.getAllStocks().values())
                     System.out.println(stock);
             }
-            
+
             // 🟢 add new stock (admin only)
             else if (cmd.equalsIgnoreCase("NEW-STOCK")) {
                 if (isAdmin) {
@@ -110,7 +110,7 @@ public class MarketInterface {
 
                     System.out.print("Market Price : ");
                     int market_price = scanner.nextInt();
-                    
+
                     System.out.print("Open Price : ");
                     int open_price = scanner.nextInt();
 
@@ -125,9 +125,12 @@ public class MarketInterface {
 
                     System.out.print("# Initial Floating Shares : ");
                     int initial_shares = scanner.nextInt();
-                    
+
                     if (!Market.verifyStock(sts)) {
-                        market.addStock(sts, new Stock(stock_name, sts, new int[] {market_price, open_price, close_price, high_price, low_price}, initial_shares));
+                        market.addStock(sts,
+                                new Stock(stock_name, sts,
+                                        new int[] { market_price, open_price, close_price, high_price, low_price },
+                                        initial_shares));
                         System.out.println(sts + " successfully added!");
                     } else {
                         System.out.println("STS (" + sts + ") already exists.");
@@ -141,11 +144,11 @@ public class MarketInterface {
                 if (isUser) {
                     System.out.print("Enter STS : ");
                     String sts = scanner.nextLine();
-    
+
                     if (Market.verifyStock(sts)) {
                         System.out.print("# Shares : ");
                         int shares = scanner.nextInt();
-    
+
                         investor.buy(sts.toUpperCase(), shares);
                     } else
                         System.out.println("STS (" + sts + ") not found.");
@@ -158,12 +161,12 @@ public class MarketInterface {
                 if (isUser) {
                     System.out.print("Enter STS : ");
                     String sts = scanner.nextLine().toUpperCase();
-    
+
                     if (Market.verifyStock(sts)) {
                         if (investor.inPortfolio(sts)) {
                             System.out.print("# Shares : ");
                             int shares = scanner.nextInt();
-                            
+
                             investor.sell(sts, shares);
                         } else
                             System.out.println("STS (" + sts + ") not in Portfolio.");
@@ -192,14 +195,14 @@ public class MarketInterface {
                 else
                     System.out.println("STS (" + sts + ") not found.");
             }
-            
+
             // 🟢 print watchlist (user-only)
             else if (cmd.equalsIgnoreCase("WATCHLIST")) {
                 if (isUser) {
                     if (investor.getWatchlist().isEmpty()) {
                         System.out.println("No items in Watchlist.");
                     } else {
-                        for (String item: investor.getWatchlist())
+                        for (String item : investor.getWatchlist())
                             System.out.println("- " + item);
                     }
                     System.out.println();
@@ -211,7 +214,7 @@ public class MarketInterface {
             else if (cmd.equalsIgnoreCase("PORTFOLIO")) {
                 if (isUser) {
                     System.out.println("Portfolio --------------+");
-                    for(String sts: investor.getPortfolio().keySet()) {
+                    for (String sts : investor.getPortfolio().keySet()) {
                         int shares = investor.getPortfolio().get(sts);
                         int dollar_value = shares * market.getStock(sts).market_price * shares;
                         System.out.println(sts + " :\t" + shares + "\t($ " + dollar_value + ")");
@@ -253,8 +256,7 @@ public class MarketInterface {
                             System.out.println(sts + " removed from watchlist.\n");
                         } else
                             System.out.println(sts + " not in Watchlist.\n");
-                    }
-                    else
+                    } else
                         System.out.println("Invalid STS was entered\n");
                 } else {
                     System.out.println("**USER ONLY**");
@@ -275,15 +277,13 @@ public class MarketInterface {
                             if (admin.getInvestor(Integer.valueOf(id)).inWatchlist(sts)) {
                                 admin.getInvestor(Integer.valueOf(id)).removeFromWatchlist(sts);
                                 System.out.println(sts + " removed from watchlist.\n");
-                            } else{
+                            } else {
                                 admin.getInvestor(Integer.valueOf(id)).addToWatchlist(sts);
                                 System.out.println(sts + " added to watchlist.\n");
                             }
-                        }
-                        else
+                        } else
                             System.out.println("Invalid STS was entered\n");
-                    }
-                    else{
+                    } else {
                         System.out.println("Investor with ID: " + id + " not in database.\n");
                     }
                 } else {
@@ -319,7 +319,7 @@ public class MarketInterface {
             else if (cmd.equalsIgnoreCase("list-users")) {
                 if (isAdmin)
                     if (!admin.getAllInvestors().isEmpty()) {
-                        for(int id: admin.getAllInvestors().keySet())
+                        for (int id : admin.getAllInvestors().keySet())
                             System.out.println(admin.getInvestor(id));
                         System.out.println();
                     } else
@@ -330,7 +330,7 @@ public class MarketInterface {
 
             // invalid commmand
             else {
-                if(!cmd.equalsIgnoreCase("exit"))
+                if (!cmd.equalsIgnoreCase("exit"))
                     System.out.println("Please enter a valid command. See command 'man' for the manual page.");
             }
 

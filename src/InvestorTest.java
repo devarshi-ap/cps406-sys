@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InvestorTest {
-
-
     @Test
     public void testGetTransactions() {
         Investor investor = new Investor("John", "john@example.com", 10000);
@@ -16,7 +14,7 @@ public class InvestorTest {
         investor.addTransaction("SELL-MSFT-20");
         assertEquals(transactions, investor.getTransactions());
     }
-   
+
     @Test
     public void testGetWatchlist() {
         Investor investor = new Investor("John", "john@example.com", 10000);
@@ -27,8 +25,7 @@ public class InvestorTest {
         investor.addToWatchlist("MSFT");
         assertEquals(watchlist, investor.getWatchlist());
     }
- 
- 
+
     public void testGetPortfolio() {
         Investor investor = new Investor("John", "john@example.com", 10000);
         investor.buy("AAPL", 5);
@@ -38,35 +35,31 @@ public class InvestorTest {
         assertEquals(5, (int) portfolio.get("AAPL"));
         assertEquals(0, (int) portfolio.get("GOOG"));
     }
-   
+
     @Test
     public void testToString() {
         Investor investor = new Investor("John", "john@example.com", 10000);
-        assertEquals("Name - John, Email - john@example.com, Funds - 10000", investor.toString());
+        assertEquals("\nID - 13\nName - John\nEmail - john@example.com\nFunds - 10000", investor.toString());
     }
- 
- 
+
     public void testInWatchList() {
         // Test if a stock is in the watchlist
         Investor investor = new Investor("John", "john@example.com", 10000);
         investor.addToWatchlist("AAPL");
         assertTrue(investor.inWatchlist("AAPL"));
- 
- 
+
         // Test if a stock is not in the watchlist
         assertFalse(investor.inWatchlist("GOOGL"));
     }
- 
- 
+
     @Test
     public void testInPortfolio() {
         // Test if a stock is in the portfolio
         Investor investor = new Investor("John", "john@example.com", 10000);
         investor.addToPortfolio("AAPL", 10);
         assertTrue(investor.inPortfolio("AAPL"));
- 
- 
+
         // Test if a stock is not in the portfolio
         assertFalse(investor.inPortfolio("GOOGL"));
     }
- }
+}

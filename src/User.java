@@ -1,5 +1,4 @@
 
-
 public class User {
     /**
      * Instance variables for User objects
@@ -25,12 +24,12 @@ public class User {
     /**
      * Return ID of User
      * 
-     * @return  user ID
+     * @return user ID
      */
     public int getId() {
         return this.id;
     }
-    
+
     /**
      * Return User object as a String
      * 
