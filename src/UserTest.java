@@ -10,9 +10,10 @@ public class UserTest {
         assertEquals(expected, actual);
     }
 
+    @Test
     public void testGetId() {
         User user = new User("John", "john@example.com");
-        int expected = Market.generateID();
+        int expected = Market.generateID() - 1;
         int actual = user.getId();
         assertEquals(expected, actual);
     }

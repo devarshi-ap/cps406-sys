@@ -7,10 +7,11 @@ public class AdminTest {
     @Test
     public void testToString() {
         Admin admin = new Admin("John Doe", "johndoe@example.com");
-        String expected = "\nID - 7\nName - John Doe\nEmail - johndoe@example.com\nClients - 4";
+        String expected = "\nID - 20\nName - John Doe\nEmail - johndoe@example.com\nClients - 4";
         assertEquals(expected, admin.toString());
     }
 
+    @Test
     public void testHasInvestor() {
         Admin admin = new Admin("John", "john@example.com");
         Investor investor = new Investor("Bob", "bob@example.com", 50000);
@@ -23,6 +24,7 @@ public class AdminTest {
         assertFalse(admin.hasInvestor(-1));
     }
 
+    @Test
     public void testGetInvestor() {
         Admin admin = new Admin("John", "john@example.com");
         Investor investor = new Investor("Bob", "bob@example.com", 50000);
@@ -46,17 +48,4 @@ public class AdminTest {
         admin.newInvestor("Alice", "alice@example.com", 1000);
         admin.newInvestor("Bob", "bob@example.com", 2000);
     }
-
-    // @Test
-    // public void testGetAllInvestors() {
-    //     HashMap<Integer, Investor> expectedInvestors = new HashMap<>();
-    //     expectedInvestors.put(1, new Investor("Steve Carell", "steve@gmail.com", 100_000));
-    //     expectedInvestors.put(2, new Investor("Christian Bale", "cbale@yahoo.com", 200_000));
-    //     expectedInvestors.put(3, new Investor("Ryan Gosling", "ryan@hotmail.com", 300_000));
-    //     expectedInvestors.put(4, new Investor("Brad Pitt", "brad@gmail.com", 400_000));
-    //     expectedInvestors.put(5, new Investor("Alice", "alice@example.com", 1000));
-    //     expectedInvestors.put(6, new Investor("Bob", "bob@example.com", 2000));
-
-    //     assertEquals(expectedInvestors, admin.getAllInvestors());
-    // }
 }

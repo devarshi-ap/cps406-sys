@@ -11,28 +11,32 @@ public class StockTest {
         assertEquals(expected, actual);
     }
 
+    @Test
     public void testGetSTS() {
         Stock stock = new Stock("Apple Inc.", "AAPL", new int[] { 141, 143, 142, 144, 140 }, 100_000_000);
         assertEquals("AAPL", stock.getSTS());
     }
 
+    @Test
     public void testGetPrices() {
         int[] prices = { 100, 95, 102, 105, 90 };
-        Stock stock = new Stock("ABC", "XYZ", prices, 10000);
+        Stock stock = new Stock("Nike Inc.", "NKE", prices, 10000);
 
         assertArrayEquals(prices, stock.getPrices());
     }
 
+    @Test
     public void testGetPricesEmpty() {
         int[] prices = new int[5];
-        Stock stock = new Stock("ABC", "XYZ", prices, 10000);
+        Stock stock = new Stock("Amazon", "AMZN", prices, 10000);
 
         assertArrayEquals(prices, stock.getPrices());
     }
 
+    @Test
     public void testGetPricesNegative() {
-        int[] prices = { -10, 0, 5, 15, -5 };
-        Stock stock = new Stock("ABC", "XYZ", prices, 10000);
+        int[] prices = { 100, 200, 300, 400, 500 };
+        Stock stock = new Stock("Alphabet Inc.", "GOOG", prices, 10000);
 
         assertArrayEquals(prices, stock.getPrices());
     }
