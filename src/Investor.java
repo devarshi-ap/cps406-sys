@@ -78,28 +78,29 @@ public class Investor extends User {
      * @param shares
      */
     public void buy(String sts, int shares) {
-        if (shares <= Market.stocks.get(sts).floating_shares) {
-            // sts exists and enough floating shares present, buy stock
-            int dollar_amt = Market.stocks.get(sts).market_price * shares;
+        if (Market.verifyStock(sts)) {
+            if (shares <= Market.getStock(sts).floating_shares) {
+                // sts exists and enough floating shares present, buy stock
+                int dollar_amt = Market.getStock(sts).market_price * shares;
 
-            if ((dollar_amt >= 0) && ((this.wallet - dollar_amt) >= 0)) {
-                this.withdraw(dollar_amt);
+                if ((dollar_amt >= 0) && ((this.wallet - dollar_amt) >= 0)) {
+                    this.withdraw(dollar_amt);
 
-                // add to transactions
-                String txn = "BUY-" + sts.toUpperCase() + "-" + shares;
-                this.addTransaction(txn);
+                    // add to transactions
+                    String txn = "BUY-" + sts.toUpperCase() + "-" + shares;
+                    this.addTransaction(txn);
 
-                // subtract from stock floating-shares (fewer left)
-                Market.stocks.get(sts).addToFloatingShares(0 - shares);
+                    // subtract from stock floating-shares (fewer left)
+                    Market.getStock(sts).addToFloatingShares(0 - shares);
 
-                // add stock to user's portfolio
-                this.addToPortfolio(sts, shares);
+                    // add stock to user's portfolio
+                    this.addToPortfolio(sts, shares);
 
-                System.out.println("Successfully bought " + shares + " shares of " + sts + "!\n");
-            } else {
-                System.out.println("Insufficient Funds or Invalid Amount Entered!\n");
+                    System.out.println("Successfully bought " + shares + " shares of " + sts + "!\n");
+                } else {
+                    System.out.println("Insufficient Funds or Invalid Amount Entered!\n");
+                }
             }
-
         }
     }
 

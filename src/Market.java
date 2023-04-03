@@ -22,7 +22,7 @@ public class Market {
      * @param String sts
      * @return stock object
      */
-    public Stock getStock(String sts) {
+    public static Stock getStock(String sts) {
         return stocks.get(sts.toUpperCase());
     }
 
