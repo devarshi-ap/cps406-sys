@@ -26,17 +26,6 @@ public class InvestorTest {
         assertEquals(watchlist, investor.getWatchlist());
     }
 
-    // @Test
-    // public void testGetPortfolio() {
-    //     Investor investor = new Investor("John", "john@example.com", 10000);
-    //     investor.buy("AAPL", 5);
-    //     investor.buy("TSLA", 10);
-    //     HashMap<String, Integer> portfolio = investor.getPortfolio();
-    //     assertEquals(2, portfolio.size());
-    //     assertEquals(5, (int) portfolio.get("AAPL"));
-    //     assertEquals(0, (int) portfolio.get("TSLA"));
-    // }
-
     @Test
     public void testToString() {
         Investor investor = new Investor("John", "john@example.com", 10000);
