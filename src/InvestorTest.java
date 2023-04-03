@@ -59,11 +59,53 @@ public class InvestorTest {
         Market market = new Market();
         market.addStock("AAPL", new Stock("Apple", "AAPL",new int[] {160, 159, 160, 160, 157}, 100000));
         
+        int initialShares = Market.stocks.get("AAPL").floating_shares;
+
         Investor investor = new Investor("Arib", "arib@example.com", 50000);
-        investor.buy("AAPL", 10);
+        int sharesBought = 10;
+        String sts = "AAPL";
+
+        investor.buy(sts, sharesBought);
+        //Illustrate the transaction using this test variable 
+        String txn = "BUY-" + sts.toUpperCase() + "-" + sharesBought;
 
         assertTrue(investor.inPortfolio("AAPL"));
+        assertEquals(txn, investor.getTransactions().get(0));
         assertEquals(50000 - 10 * market.getStock("AAPL").market_price, investor.getWallet());
+        assertEquals(initialShares - sharesBought, Market.stocks.get("AAPL").floating_shares);
+    }
+
+    @Test 
+    public void testSell() {
+        Market market = new Market();
+        market.addStock("TSLA", new Stock("Tesla", "TSLA",new int[] {190, 191, 192, 192, 187}, 100000));
+        ArrayList<String> transactions = new ArrayList<String>();
+
+        int initialShares = Market.stocks.get("TSLA").floating_shares;
+
+        Investor investor = new Investor("Arib", "arib@example.com", 50000);
+        int sharesBought = 20;
+        String sts = "TSLA";
+
+        //First buy a stock to later sell it
+        investor.buy(sts, sharesBought);
+        int walletAfterBuy = 50000 - 20 * market.getStock("TSLA").market_price;
+        //Illustrate the transaction using this test variable 
+        String txnBuy = "BUY-" + sts.toUpperCase() + "-" + sharesBought;
+        transactions.add(txnBuy);
+
+        //Now sell a stock
+        int sharesSold = 15;
+        investor.sell(sts, sharesSold);
+        int moneyEarned = 15 * market.getStock("TSLA").market_price;
+        //Illustrate the transaction using this test variable 
+        String txnSell = "SELL-" + sts.toUpperCase() + "-" + sharesSold;
+        transactions.add(txnSell);
+
+        assertTrue(investor.inPortfolio("TSLA"));
+        assertEquals(transactions.toString(), investor.getTransactions().toString());
+        assertEquals(walletAfterBuy + moneyEarned, investor.getWallet());
+        assertEquals((initialShares - sharesBought) + sharesSold, Market.stocks.get("TSLA").floating_shares);
     }
 
     @Test
@@ -75,8 +117,8 @@ public class InvestorTest {
         investor.deposit(depositAmount);
 
         assertEquals(originalFunds + depositAmount, investor.getWallet());
-        
     }
+
     /*
      * DEPOSIT
      * BUY
