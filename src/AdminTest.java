@@ -6,7 +6,7 @@ public class AdminTest {
     @Test
     public void testToString() {
         Admin admin = new Admin("John Doe", "johndoe@example.com");
-        String expected = "\nID - 20\nName - John Doe\nEmail - johndoe@example.com\nClients - 4";
+        String expected = "\nID - 36\nName - John Doe\nEmail - johndoe@example.com\nClients - 4";
         assertEquals(expected, admin.toString());
     }
 

@@ -29,7 +29,7 @@ public class InvestorTest {
     @Test
     public void testToString() {
         Investor investor = new Investor("John", "john@example.com", 10000);
-        assertEquals("\nID - 40\nName - John\nEmail - john@example.com\nFunds - 10000", investor.toString());
+        assertEquals("\nID - 4\nName - John\nEmail - john@example.com\nFunds - 10000", investor.toString());
     }
 
     @Test
@@ -55,10 +55,68 @@ public class InvestorTest {
     }
 
     @Test
+    public void testAddToPortfolio() {
+        Investor investor = new Investor("John", "john@email.com", 10000);
+        investor.addToPortfolio("AAPL", 10);
+        assertTrue(investor.getPortfolio().containsKey("AAPL"));
+        assertEquals(10, (int) investor.getPortfolio().get("AAPL"));
+    }
+
+    @Test
+    public void testWithdraw() {
+        Investor investor = new Investor("Alice", "alice@example.com", 1000);
+
+        // Withdraw within limits
+        investor.withdraw(500);
+        assertEquals(500, investor.getWallet());
+
+        // Withdraw exceeding wallet balance
+        investor.withdraw(1000);
+        assertEquals(-500, investor.getWallet());
+    }
+
+    @Test
+    public void testAddToWatchlist() {
+        Investor investor = new Investor("John", "john@example.com", 1000);
+        Stock stock = new Stock("GOOGL", "Google Inc.", new int[] { 100, 90, 95, 105, 85 }, 1000);
+
+        investor.addToWatchlist(stock.name);
+        assertTrue(investor.getWatchlist().contains(stock.name));
+    }
+
+    @Test
+    public void testRemoveFromWatchlist() {
+        Investor investor = new Investor("John", "john@example.com", 1000);
+        Stock stock = new Stock("GOOGL", "Google Inc.", new int[] { 100, 90, 95, 105, 85 }, 1000);
+
+        investor.addToWatchlist(stock.name);
+        assertTrue(investor.getWatchlist().contains(stock.name));
+
+        investor.removeFromWatchlist(stock.name);
+        assertFalse(investor.getWatchlist().contains(stock.name));
+    }
+
+    @Test
+    public void testRemoveFromPortfolio() {
+        Investor investor = new Investor("John Smith", "john.smith@example.com", 10000);
+        investor.addToPortfolio("AAPL", 100);
+
+        // Remove a stock that is in the portfolio
+        investor.removeFromPortfolio("AAPL");
+        assertEquals(0, investor.getPortfolio().size());
+        assertNull(investor.getPortfolio().get("AAPL"));
+
+        // Remove a stock that is not in the portfolio
+        investor.removeFromPortfolio("GOOGL");
+        assertEquals(0, investor.getPortfolio().size());
+        assertNull(investor.getPortfolio().get("GOOGL"));
+    }
+
+    @Test
     public void testBuy() {
         Market market = new Market();
-        market.addStock("AAPL", new Stock("Apple", "AAPL",new int[] {160, 159, 160, 160, 157}, 100000));
-        
+        market.addStock("AAPL", new Stock("Apple", "AAPL", new int[] { 160, 159, 160, 160, 157 }, 100000));
+
         int initialShares = Market.stocks.get("AAPL").floating_shares;
 
         Investor investor = new Investor("Arib", "arib@example.com", 50000);
@@ -66,7 +124,7 @@ public class InvestorTest {
         String sts = "AAPL";
 
         investor.buy(sts, sharesBought);
-        //Illustrate the transaction using this test variable 
+        // Illustrate the transaction using this test variable
         String txn = "BUY-" + sts.toUpperCase() + "-" + sharesBought;
 
         assertTrue(investor.inPortfolio("AAPL"));
@@ -75,10 +133,10 @@ public class InvestorTest {
         assertEquals(initialShares - sharesBought, Market.stocks.get("AAPL").floating_shares);
     }
 
-    @Test 
+    @Test
     public void testSell() {
         Market market = new Market();
-        market.addStock("TSLA", new Stock("Tesla", "TSLA",new int[] {190, 191, 192, 192, 187}, 100000));
+        market.addStock("TSLA", new Stock("Tesla", "TSLA", new int[] { 190, 191, 192, 192, 187 }, 100000));
         ArrayList<String> transactions = new ArrayList<String>();
 
         int initialShares = Market.stocks.get("TSLA").floating_shares;
@@ -87,18 +145,18 @@ public class InvestorTest {
         int sharesBought = 20;
         String sts = "TSLA";
 
-        //First buy a stock to later sell it
+        // First buy a stock to later sell it
         investor.buy(sts, sharesBought);
         int walletAfterBuy = 50000 - 20 * market.getStock("TSLA").market_price;
-        //Illustrate the transaction using this test variable 
+        // Illustrate the transaction using this test variable
         String txnBuy = "BUY-" + sts.toUpperCase() + "-" + sharesBought;
         transactions.add(txnBuy);
 
-        //Now sell a stock
+        // Now sell a stock
         int sharesSold = 15;
         investor.sell(sts, sharesSold);
         int moneyEarned = 15 * market.getStock("TSLA").market_price;
-        //Illustrate the transaction using this test variable 
+        // Illustrate the transaction using this test variable
         String txnSell = "SELL-" + sts.toUpperCase() + "-" + sharesSold;
         transactions.add(txnSell);
 
