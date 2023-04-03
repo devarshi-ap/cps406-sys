@@ -65,6 +65,18 @@ public class InvestorTest {
         assertTrue(investor.inPortfolio("AAPL"));
         assertEquals(50000 - 10 * market.getStock("AAPL").market_price, investor.getWallet());
     }
+
+    @Test
+    public void testDeposit() {
+        Investor investor = new Investor("Arib", "arib@example.com", 50000);
+
+        int originalFunds = investor.getWallet();
+        int depositAmount = 10000;
+        investor.deposit(depositAmount);
+
+        assertEquals(originalFunds + depositAmount, investor.getWallet());
+        
+    }
     /*
      * DEPOSIT
      * BUY
