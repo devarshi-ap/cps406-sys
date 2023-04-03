@@ -40,7 +40,7 @@ public class InvestorTest {
     @Test
     public void testToString() {
         Investor investor = new Investor("John", "john@example.com", 10000);
-        assertEquals("\nID - 39\nName - John\nEmail - john@example.com\nFunds - 10000", investor.toString());
+        assertEquals("\nID - 42\nName - John\nEmail - john@example.com\nFunds - 10000", investor.toString());
     }
 
     @Test
@@ -65,6 +65,16 @@ public class InvestorTest {
         assertFalse(investor.inPortfolio("GOOGL"));
     }
 
+    @Test
+    public void testBuy() {
+        
+        Market market = new Market();
+        Investor investor = new Investor("Arib", "arib@example.com", 50000);
+        investor.buy("TSLA", 10);
+
+        assertTrue(investor.inPortfolio("TSLA"));
+        assertEquals(50000 - 10 * market.getStock("TSLA").market_price, investor.getWallet());
+    }
     /*
      * DEPOSIT
      * BUY

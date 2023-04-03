@@ -216,7 +216,7 @@ public class MarketInterface {
                     System.out.println("Portfolio --------------+");
                     for (String sts : investor.getPortfolio().keySet()) {
                         int shares = investor.getPortfolio().get(sts);
-                        int dollar_value = shares * market.getStock(sts).market_price * shares;
+                        int dollar_value = shares * market.getStock(sts).market_price;
                         System.out.println(sts + " :\t" + shares + "\t($ " + dollar_value + ")");
                     }
                     System.out.println();
