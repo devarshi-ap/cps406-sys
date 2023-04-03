@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 public class InvestorTest {
+
     @Test
     public void testGetTransactions() {
         Investor investor = new Investor("John", "john@example.com", 10000);
@@ -55,11 +56,14 @@ public class InvestorTest {
 
     @Test
     public void testBuy() {
+        Market market = new Market();
+        market.addStock("AAPL", new Stock("Apple", "AAPL",new int[] {160, 159, 160, 160, 157}, 100000));
+        
         Investor investor = new Investor("Arib", "arib@example.com", 50000);
         investor.buy("AAPL", 10);
 
         assertTrue(investor.inPortfolio("AAPL"));
-        assertEquals(50000 - 10 * Market.getStock("AAPL").market_price, investor.getWallet());
+        assertEquals(50000 - 10 * market.getStock("AAPL").market_price, investor.getWallet());
     }
     /*
      * DEPOSIT

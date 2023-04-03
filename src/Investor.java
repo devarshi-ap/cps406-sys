@@ -79,9 +79,9 @@ public class Investor extends User {
      */
     public void buy(String sts, int shares) {
         if (Market.verifyStock(sts)) {
-            if (shares <= Market.getStock(sts).floating_shares) {
+            if (shares <= Market.stocks.get(sts).floating_shares) {
                 // sts exists and enough floating shares present, buy stock
-                int dollar_amt = Market.getStock(sts).market_price * shares;
+                int dollar_amt = Market.stocks.get(sts).market_price * shares;
 
                 if ((dollar_amt >= 0) && ((this.wallet - dollar_amt) >= 0)) {
                     this.withdraw(dollar_amt);
@@ -91,7 +91,7 @@ public class Investor extends User {
                     this.addTransaction(txn);
 
                     // subtract from stock floating-shares (fewer left)
-                    Market.getStock(sts).addToFloatingShares(0 - shares);
+                    Market.stocks.get(sts).addToFloatingShares(0 - shares);
 
                     // add stock to user's portfolio
                     this.addToPortfolio(sts, shares);
