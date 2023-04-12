@@ -60,6 +60,8 @@ public class MarketInterface {
             System.out.println("\n------+ ADMIN:" + admin + "\n------+\n");
         }
 
+        System.out.println("\nSee command 'man' for available commands.\n");
+
         // infinite prompt
         String cmd;
         do {
