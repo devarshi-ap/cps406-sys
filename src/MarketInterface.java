@@ -330,7 +330,7 @@ public class MarketInterface {
                     System.out.println("**ADMIN ONLY**");
             }
 
-            // 🟢 overwrites (toggles) stock from watchlist of investor ID (admin-only)
+            // 🟢 removes investor of investor ID (admin-only)
             else if (cmd.equalsIgnoreCase("REMOVE-USER")) {
                 if (isAdmin) {
                     System.out.print("Enter Investor ID : ");

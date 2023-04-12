@@ -94,7 +94,12 @@ public class Investor extends User {
                     Market.stocks.get(sts).addToFloatingShares(0 - shares);
 
                     // add stock to user's portfolio
-                    this.addToPortfolio(sts, shares);
+                    if (this.inPortfolio(sts)) {
+                        this.updatePortfolio(sts, this.getPortfolio().get(sts) + shares);
+                    } 
+                    else {
+                        this.addToPortfolio(sts, shares);   
+                    }
 
                     System.out.println("Successfully bought " + shares + " shares of " + sts + "!\n");
                 } else {
@@ -189,6 +194,11 @@ public class Investor extends User {
         this.portfolio.put(sts, shares);
     }
 
+     /**
+     * Check if stock is in portfolio
+     *
+     * @param sts
+     */
     public boolean inPortfolio(String sts) {
         return this.portfolio.keySet().contains(sts);
     }
