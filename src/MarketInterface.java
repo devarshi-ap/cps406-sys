@@ -38,7 +38,7 @@ public class MarketInterface {
         if (isAdmin) {
             admin = new Admin(name, email);
             System.out.println("You've chosen to play as Admin.");
-            System.out.println("\n------+" + admin + "\n------+\n");
+            System.out.println("\n------+ ADMIN:" + admin + "\n------+\n");
 
         } else {
             String initial_amount;
@@ -56,8 +56,8 @@ public class MarketInterface {
             admin = new Admin("Bill gates", "bill@gmail.com");
             admin.newInvestor(investor);
 
-            System.out.println("\n------+" + investor + "\n------+");
-            System.out.println("\n------+" + admin + "\n------+\n");
+            System.out.println("\n------+ INVESTOR:" + investor + "\n------+");
+            System.out.println("\n------+ ADMIN:" + admin + "\n------+\n");
         }
 
         // infinite prompt
