@@ -78,7 +78,7 @@ public class Market {
                         new-stock\t\t<adds a new stock into the market>
                         list-users\t\t<displays a list of all user's in the market>
                         overwrite-watchlist\t<overwrites data on an investor's watchlist>
-                        *remove-user\t\t<removes a user from the market>
+                        remove-user\t\t<removes a user from the market>
 
                         -----------------------------------------------+
                         """);
