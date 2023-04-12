@@ -77,4 +77,13 @@ public class Admin extends User {
     public void newInvestor(Investor investor) {
         this.investors.put(investor.getId(), investor);
     }
+
+    /**
+     * Removes investor object from the HashMap
+     * 
+     * @param id
+     */
+    public void remInvestor(int id) {
+        this.investors.remove(id);
+    }
 }

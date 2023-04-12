@@ -109,7 +109,7 @@ public class Market {
             data = line.split(",");
             int[] prices = { Integer.valueOf(data[2]), Integer.valueOf(data[3]), Integer.valueOf(data[4]),
                     Integer.valueOf(data[5]), Integer.valueOf(data[6]) };
-            stock = new Stock(data[0], data[1], prices, Integer.valueOf(data[8]));
+            stock = new Stock(data[0], data[1], prices, Integer.valueOf(data[7]));
             stocks.put(data[1], stock);
         }
 

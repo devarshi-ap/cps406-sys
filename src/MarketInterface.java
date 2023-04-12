@@ -328,6 +328,23 @@ public class MarketInterface {
                     System.out.println("**ADMIN ONLY**");
             }
 
+            // 🟢 overwrites (toggles) stock from watchlist of investor ID (admin-only)
+            else if (cmd.equalsIgnoreCase("REMOVE-USER")) {
+                if (isAdmin) {
+                    System.out.print("Enter Investor ID : ");
+                    String id = scanner.nextLine();
+
+                    if (admin.hasInvestor(Integer.valueOf(id))) {
+                        admin.remInvestor(Integer.valueOf(id));
+                        System.out.println("Investor with ID: " + id + " removed from database.\n");
+                    } else {
+                        System.out.println("Investor with ID: " + id + " not in database.\n");
+                    }
+                } else {
+                    System.out.println("**ADMIN ONLY**");
+                }
+            }
+
             // invalid commmand
             else {
                 if (!cmd.equalsIgnoreCase("exit"))
