@@ -1,4 +1,4 @@
-# CPS406 Phase 4
+# Stock Market Simulator
 
 ## Stock-Market System Documentation
 
