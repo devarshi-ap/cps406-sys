@@ -8,6 +8,9 @@ This project features a Stock Market Simulator, implemented using an Object Orie
 - **Login Simulation:** When setting up the program you are also prompted to register with an email and username, which adds your credentials temporarily to the system and assigns you a corresponding user ID. This also applies to accounts created through the admin command.
 - **Extensive Manual Page:** By calling the command `man`, you are greeted with a plethora of different commands and their corresponding functionality description. The page is descriptive enough to give the user an idea of how to use the program in its entirety.
 - **Rigorously Tested:** Included in the source folder are also the test cases for this program; with the help of JUnit. The program was tested for and passed all validity checks for CRUD functionality (CREATE, READ, UPDATE, DELETE).
+
+## Creation Process
+
 To run this system:
 
 ```bash
