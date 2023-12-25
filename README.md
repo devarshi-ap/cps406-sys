@@ -11,8 +11,10 @@ This project features a Stock Market Simulator, implemented using an Object Orie
 
 ## Creation Process
 To boot, we created a Gantt chart to assign timeframes to certain tasks, and get a general idea of the lifespan of the development.
+Figure 1:
 ![image](https://lh3.googleusercontent.com/keep-bbsk/ALhRneF8SmFldfAgMbYrm0nE_I6gyKfcuC_Q9PXQJE6k543s38xZZreeTncJrToM_QCmBaeIPpN-cDxrCPT8iMUwsc5V_85efvZAFDwD2I2zmjDV-C25=s512)
 
+After which, we created a list of functional and non-functional requirements- proceedingly creating a class diagra
 
 
 To run this system:
