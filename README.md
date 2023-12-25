@@ -10,7 +10,10 @@ This project features a Stock Market Simulator, implemented using an Object Orie
 - **Rigorously Tested:** Included in the source folder are also the test cases for this program; with the help of JUnit. The program was tested for and passed all validity checks for CRUD functionality (CREATE, READ, UPDATE, DELETE).
 
 ## Creation Process
+To boot, we created a Gantt chart to assign timeframes to certain tasks, and get a general idea of the lifespan of the development.
 ![image](https://lh3.googleusercontent.com/keep-bbsk/ALhRneF8SmFldfAgMbYrm0nE_I6gyKfcuC_Q9PXQJE6k543s38xZZreeTncJrToM_QCmBaeIPpN-cDxrCPT8iMUwsc5V_85efvZAFDwD2I2zmjDV-C25=s512)
+
+
 
 To run this system:
 
